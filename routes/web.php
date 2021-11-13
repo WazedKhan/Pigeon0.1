@@ -17,4 +17,4 @@ use App\Http\Controllers\ProfilesController;
 
 Route::get('/', [HomeController::class,'index'])->name('post.home');
 //Route::get('post/create/', [HomeController::class,'index'])->name('post.home');
-Route::get('profiles/{user_id}',[ProfilesController::class, 'index'])->name('profiles.show');
+Route::get('/profiles/',[ProfilesController::class, 'index'])->name('profiles.show');
