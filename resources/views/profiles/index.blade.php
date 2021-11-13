@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layout.base')
 
 @section('content')
 <div class="container">
@@ -13,9 +13,9 @@
                 <div class="pr-5"><strong>15</strong> followers</div>
                 <div class="pr-5"><strong>98</strong> following</div>
             </div>
-            <div class="pt-4"><b> {{ $user->name }} </b></div>
-            <div> Description </div>
-            <div><a href="#"> link </a></div>
+            <div class="pt-4"><b> {{ $user->profile->title }} </b></div>
+            <div> {{ $user->profile->details }} </div>
+            <div><a href="#"> {{ $user->profile->url }} </a></div>
         </div>
     </div>
     <div class="pt-5">

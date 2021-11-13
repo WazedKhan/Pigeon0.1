@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layout.base')
 @section('content')
 <div class="content-section">
     <form method="POST">

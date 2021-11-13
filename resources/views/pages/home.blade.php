@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layout.base')
 @section('content')
 <article class="media content-section">
     <div class="media-body">
