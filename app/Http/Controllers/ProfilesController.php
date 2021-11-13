@@ -7,9 +7,9 @@ use App\Models\User;
 
 class ProfilesController extends Controller
 {
-    public function index()
+    public function index($user)
     {
-        $user = User::find(1);
+        $user = User::findOrFail($user);
         //dd($data);
         return view('profiles.index', [
             'user'=>$user,
