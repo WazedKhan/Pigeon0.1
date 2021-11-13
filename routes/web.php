@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfilesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +16,5 @@ use App\Http\Controllers\HomeController;
 
 
 Route::get('/', [HomeController::class,'index'])->name('post.home');
-Route::get('post/create/', [HomeController::class,'index'])->name('post.home');
+//Route::get('post/create/', [HomeController::class,'index'])->name('post.home');
+Route::get('profiles/',[ProfilesController::class, 'index'])->name('profiles');
