@@ -8,7 +8,7 @@
         <div class="navbar-nav mr-auto">
           <a class="nav-item nav-link" href=" {{ route('post.home') }} ">Home</a>
           <a class="nav-item nav-link" href=" {{ route('profiles.show',$user->id) }} ">Profile</a>
-          <a class="nav-item nav-link" href="#">Create New Post</a>
+          <a class="nav-item nav-link" href=" {{ route('post.create') }} ">Create New Post</a>
           <a class="nav-item nav-link" href="#">About</a>
           
         </div>

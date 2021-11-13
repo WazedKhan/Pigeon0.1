@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-3 p-5">
-            <img src="/svg/freeCodeCampLogo.svg" class="rounded-circle">
+            <img src="/media/photo.jpg" class="rounded float-left w-100">
         </div>
         <div class="col-9 pt-5">
             <div><h2> {{$user->username}} </h2></div>
@@ -20,7 +20,7 @@
     </div>
     <div class="pt-5">
         <article class="media content-section">
-            <img class="rounded-circle article-img" src="#">
+            <img class="rounded-circle article-img" src="/media/photo.jpg">
             <div class="media-body">
               <div class="article-metadata">
                 <a class="mr-2" href="#">{{ $user->username }}</a>
