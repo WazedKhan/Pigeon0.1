@@ -82,3 +82,13 @@ body {
   .account-heading {
     font-size: 2.5rem;
   }
+
+  
+/* Extra css */
+  .sticky {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    top: 0;
+    align-self: flex-start; /* <-- this is the fix */
+    background-color: red;  /* Not necessary -- for example only */
+  }

@@ -15,6 +15,8 @@ class CreateAnonymousesTable extends Migration
     {
         Schema::create('anonymouses', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('details');
             $table->timestamps();
         });
     }
