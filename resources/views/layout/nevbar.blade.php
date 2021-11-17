@@ -21,8 +21,13 @@
           <a class="navbar-brand" href=" {{route('anonymous.index')}} ">
             <img src="media/anon.png" width="30" height="30" class="rounded-circle d-inline-block align-top" alt="Anonymous">
           </a>
+          @guest
+          <a class="nav-item nav-link" href="#">{{ Session::get('name') ?? 'Name'}}</a>
           <a class="nav-item nav-link" href="#">Login</a>
-          <a class="nav-item nav-link" href="#">Register</a>
+          <a class="nav-item nav-link" href=" {{ route('register') }} ">Register</a>
+          @endguest
+          @else
+          <a class="nav-item nav-link" href="#">Hi</a>
         </div>
       </div>
     </div>
