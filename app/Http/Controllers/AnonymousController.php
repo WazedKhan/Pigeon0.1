@@ -26,7 +26,7 @@ class AnonymousController extends Controller
             'title'=>$data->title,
             'details'=>$data->details
         ]);
-        return redirect('/anonymous/')->withErrors("ee");
+        return redirect()->route('anonymous.index');
     }
     public function search(Request $request){
         // Get the search value from the request
