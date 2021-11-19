@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -18,8 +19,8 @@ class PostController extends Controller
             'caption'=>'required',
             'image'=>['required','image']
         ]);
-
-        auth()->user()-posts()->create($data);
-        dd(request()->all());
+        dd(Auth::User()->all()  );
+        //user()->posts()->create($data);
+        
     }
 }

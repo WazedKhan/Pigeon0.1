@@ -14,7 +14,12 @@ Route::get('/post/create/', [PostController::class,'create'])->name('post.create
 Route::post('/post', [PostController::class,'store'])->name('post');
 
 Route::get('profiles/{user_id}',[ProfilesController::class, 'index'])->name('profiles.show');
-Route::get('/register', [UserController::class, 'registerView'])->name('register');
+Route::get('/register', [UserController::class, 'registerForm'])->name('register');
+Route::post('create/user', [UserController::class, 'storeUser'])->name('create.user');
+Route::get('login/', [UserController::class, 'LoginView'])->name('login');
+Route::post('signin/', [UserController::class, 'signIn'])->name('signin');
+Route::get('logout/', [UserController::class, 'logout'])->name('logout');
+
 //Route::get('/register/create', [UserController::class, 'register'])->name('register.create');
 
 Route::prefix('/anonymous')->group(function () {
