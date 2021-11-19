@@ -9,18 +9,21 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+    
+
     public function create()
     {
         return view('post.create_post');
     }
     public function store()
     {
-        $data = request()->validate([
-            'caption'=>'required',
-            'image'=>['required','image']
+        $imagePath = request('image')->store('media/posts','public');
+        //dd(request('image')->store('media','public'));
+        Post::create([
+            'caption' => request('caption'), 
+            'image' => $imagePath, 
+            'user_id' => Auth::id()
         ]);
-        dd(Auth::User()->all()  );
-        //user()->posts()->create($data);
-        
+        return redirect()->route('post.home');
     }
 }
