@@ -33,9 +33,8 @@
         <div class="media-body">
           <div class="article-metadata">
             <a class="mr-2" href="#">{{ $user->username }}</a>
-            <small class="text-muted">Date</small>
+            <small class="text-muted">{{$item->updated_at->format('d/m/y')}}</small>
           </div>
-          <h2><a class="article-title" href=" {{$item->id}} ">Title</a></h2>
           <p class="article-content">{{ $item->caption }}</p>
           <div>
             <img src="/storage/{{ $item->image }}" class="img-fluid" alt="Responsive image">
