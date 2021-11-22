@@ -1,15 +1,24 @@
 @extends('layout.base')
 @section('content')
-<article class="media content-section">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="#"> {{$user->name}} </a>
-        <small class="text-muted">Posted Date</small>
+@foreach ($post as $item)
+
+  <article class="media content-section">
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="#"> {{$item->user->name}} </a>
+          <div>
+            <small class="text-muted"> {{$item->updated_at->format('d-m-y')}} </small>
+          </div>
+
+        </div>
+        <p class="article-content"> <strong>{{$item->caption}}</strong></p>
+        <div>
+          <img src="/storage/{{ $item->image }}" class="img-fluid" alt="Responsive image">
+        </div>
       </div>
-      <h2><a class="article-title" href="#">Post Title</a></h2>
-      <p class="article-content">Post Content</p>
-    </div>
-</article>
+  </article>
+
+@endforeach
 @endsection
 @section('sidebar')
     @include('layout.sidebar')
