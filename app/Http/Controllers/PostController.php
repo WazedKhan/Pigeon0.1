@@ -9,7 +9,11 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    
+    public function index()
+    {
+        $post = Post::all();
+        return view('post.home',compact('post'));
+    }
 
     public function create()
     {
