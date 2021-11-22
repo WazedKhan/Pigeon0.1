@@ -11,7 +11,7 @@
     <div class="col-7 pt-5">
         <div><h2> {{$user->username}} </h2></div>
         <div class="d-flex">
-            <div class="pr-5"><strong>0</strong> posts</div>
+            <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
             <div class="pr-5"><strong>15</strong> followers</div>
             <div class="pr-5"><strong>98</strong> following</div>
         </div>
@@ -26,6 +26,8 @@
 </div>
 
 <div class="pt-5">
+    @foreach ($user->posts as $item)
+
     <article class="media content-section">
         <img class="rounded-circle article-img" src="/media/photo.jpg">
         <div class="media-body">
@@ -33,10 +35,15 @@
             <a class="mr-2" href="#">{{ $user->username }}</a>
             <small class="text-muted">Date</small>
           </div>
-          <h2><a class="article-title" href="#">Title</a></h2>
-          <p class="article-content">Description</p>
+          <h2><a class="article-title" href=" {{$item->id}} ">Title</a></h2>
+          <p class="article-content">{{ $item->caption }}</p>
+          <div>
+            <img src="/storage/{{ $item->image }}" class="img-fluid" alt="Responsive image">
+          </div>
         </div>
     </article>
+
+    @endforeach
 </div>
 
 
