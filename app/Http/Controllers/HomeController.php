@@ -7,13 +7,6 @@ use App\Models\User;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        $user = User::find(1);
-        return view('post.home',[
-            'user' => $user,
-        ]);
-    }
     public function createPost(Request $data)
     {   
         # code...
