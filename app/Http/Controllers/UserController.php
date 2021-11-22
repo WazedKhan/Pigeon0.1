@@ -16,7 +16,7 @@ class UserController extends Controller
     }
     public function storeUser()
     {
-        dd(request()->all());
+        //dd(request()->all());
         $this->validate((request()),[
             'name'=>'required',
             'username'=>'required',
