@@ -8,10 +8,11 @@ use App\Http\Controllers\AnonymousController;
 use App\Http\Controllers\UserController;
 
 
-
-Route::get('/', [HomeController::class,'index'])->name('post.home');
-Route::get('/post/create/', [PostController::class,'create'])->name('post.create');
-Route::post('/post', [PostController::class,'store'])->name('post');
+Route::prefix('post')->group(function () {
+    Route::get('/', [PostController::class,'index'])->name('post.home');
+    Route::get('/create/', [PostController::class,'create'])->name('post.create');
+    Route::post('/store/', [PostController::class,'store'])->name('post'); 
+});
 
 Route::get('profiles/{user_id}',[ProfilesController::class, 'index'])->name('profiles.show');
 Route::get('/register', [UserController::class, 'registerForm'])->name('register');
