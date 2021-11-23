@@ -1,5 +1,8 @@
 @extends('layout.base')
 @section('content')
+@if (session()->has('success'))
+    {{session()->get('sucesss')}}
+@endif
 @foreach ($post as $item)
 
   <article class="media content-section">

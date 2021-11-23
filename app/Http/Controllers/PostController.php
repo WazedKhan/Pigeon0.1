@@ -28,6 +28,6 @@ class PostController extends Controller
             'image' => $imagePath, 
             'user_id' => Auth::id()
         ]);
-        return redirect()->route('post.home');
+        return redirect()->route('post.home')->with('success','Post Created Successfully!');
     }
 }
