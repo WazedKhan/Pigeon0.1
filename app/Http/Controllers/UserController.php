@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+ 
     public function registerForm(Request $request)
     {
         return view('auth.register');
@@ -23,13 +25,19 @@ class UserController extends Controller
             'email'=>['required','email'],
             'password'=>'required'
         ]);
-        $user = User::create(request(['name','username','email','password']));
+        $user = User::create([
+            'name'=> request()->name,
+            'username'=>request()->username,
+            'email'=>request()->email,
+            'password'=>bcrypt(request()->password)
+        ]);
         Auth::login($user);
         return redirect()->route('post.home');
     }
     public function signIn(Request $request)
     {
         //dd($request->all());
+        //dd(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']]));   
         if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']]))
         {
             return redirect()->route('post.home');
