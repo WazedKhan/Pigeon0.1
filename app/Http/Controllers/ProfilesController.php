@@ -10,9 +10,29 @@ class ProfilesController extends Controller
     public function index($user)
     {
         $user = User::findOrFail($user);
-        //dd($data);
-        return view('profiles.index', [
-            'user'=>$user,
+        return view('profiles.index', compact('user'));
+    }
+
+
+    public function edit($user)
+    {
+        $user = User::find($user);
+        //dd($user->id);
+        return view('profiles.edit',compact('user'));
+    }
+
+    public function update($user)
+    {
+        $user = User::find($user);
+        $data = request()->validate([
+            'title' => 'required',
+            'details' => 'required',
+            'url' => 'url',
+            'image' => '',
         ]);
+        //dd($user->profile->title);
+        Auth()->user()->profile->update($data);
+
+        return redirect("profile/{$user->id}");
     }
 }

@@ -19,6 +19,7 @@ Route::prefix('post')->group(function () {
 Route::prefix('profile/')->group(function () {
     Route::get('/{user_id}',[ProfilesController::class, 'index'])->name('profile.show');
     Route::get('/{user_id}/edit', [ProfilesController::class, 'edit'])->name('profile.edit');
+    Route::patch('/{user_id}', [ProfilesController::class, 'update'])->name('profile.update');
 });
 
 
