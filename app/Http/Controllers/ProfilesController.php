@@ -17,6 +17,7 @@ class ProfilesController extends Controller
     public function edit($user)
     {
         $user = User::find($user);
+        $this->authorize('update', $user->profile);
         //dd($user->id);
         return view('profiles.edit',compact('user'));
     }
@@ -24,6 +25,7 @@ class ProfilesController extends Controller
     public function update($user)
     {
         $user = User::find($user);
+        $this->authorize('update', $user->profile);
         $data = request()->validate([
             'title' => 'required',
             'details' => 'required',
