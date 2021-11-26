@@ -18,6 +18,7 @@
         <div class="pt-4"><b> {{ $user->profile->title }} </b></div>
         <div> {{ $user->profile->details }} </div>
         <div><a href="">{{ $user->profile->url }}</a></div>
+        @can('update', $user->profile)
         <div class="float-right ">
             <a href=" {{route('profile.edit', $user->id)}} " class="" role="button" aria-pressed="true">
                 
@@ -29,6 +30,7 @@
 
             </a>
         </div>
+        @endcan
     </div>
 </div>
 
