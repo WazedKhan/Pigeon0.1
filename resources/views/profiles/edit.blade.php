@@ -53,6 +53,16 @@
         @endif
     </div>
 
+    <div class="form-group">
+        <label for="image" class="col-md-4 col-form-label">Profile Image</label>
+
+        <input type="file" class="form-control-file" id="image" name="image">
+
+        @if ($errors->has('image'))
+            <strong>{{ $errors->first('image') }}</strong>
+        @endif
+    </div>
+
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
