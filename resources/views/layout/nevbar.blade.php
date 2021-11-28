@@ -22,7 +22,7 @@
         <!-- Navbar Right Side -->
         <div class="navbar-nav">
           @if (Auth::check())
-          <a class="nav-item nav-link" href=" {{ route('profiles.show',Auth::user()->id??'') }} ">Profile</a>
+          <a class="nav-item nav-link" href=" {{ route('profile.show',Auth::user()->id??'') }} ">Profile</a>
           <a class="nav-item nav-link" href=" {{ route('post.create') }} ">Create New Post</a>
           <a class="nav-item nav-link" href="{{route('logout')}}">Log Out</a>
           @else
