@@ -11,9 +11,7 @@ class AnonymousController extends Controller
     {
         //$data = Anonymous::all();
         $data = Anonymous::all();
-        return view('anonymous.index',[
-            'data'=>$data
-        ]);
+        return view('anonymous.index',compact('data'));
     }
     public function create()
     {
