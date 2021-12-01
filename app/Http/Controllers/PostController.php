@@ -30,8 +30,11 @@ class PostController extends Controller
         ]);
         return redirect()->route('post.home')->with('success','Post Created Successfully!');
     }
-    public function detail()
+    public function detailView($post_id)
     {
-        re
+        // dd($post_id);
+        $post = Post::find($post_id);
+        return view('post.detail', compact('post'));
+
     }
 }
