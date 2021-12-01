@@ -30,4 +30,8 @@ class PostController extends Controller
         ]);
         return redirect()->route('post.home')->with('success','Post Created Successfully!');
     }
+    public function detail()
+    {
+        re
+    }
 }
