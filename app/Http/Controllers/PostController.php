@@ -21,7 +21,13 @@ class PostController extends Controller
     }
     public function store()
     {
-        $imagePath = request('image')->store('media/posts','public');
+        if(request('image')){
+            $imagePath = request('image')->store('media/posts','public');
+        }
+        else
+        {
+            $imagePath='Null';
+        }
         //dd(request('image')->store('media','public'));
         Post::create([
             'caption' => request('caption'), 
