@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AnonymousController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [PostController::class,'index'])->name('post.home');
 
@@ -38,4 +39,8 @@ Route::prefix('/anonymous')->group(function () {
     Route::get('/create', [AnonymousController::class, 'create'])->name('anonymous.create');
     Route::post('/store', [AnonymousController::class, 'store'])->name('anonymous.store');
     Route::post('/search/result/',[AnonymousController::class, 'search'])->name('search');
+});
+
+Route::prefix('/admin/')->group(function () {
+    Route::get('/', [AdminController::class, 'index']);//->name('anonymous.index');
 });
