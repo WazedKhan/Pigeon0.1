@@ -34,7 +34,7 @@ class ProfilesController extends Controller
         ]);
 
         if(request('image')){
-            $image_path  = request('image')->store('media/profile','public');
+            $image_path  = request('image')->store('/storage/profile','public');
         }
 
         Auth()->user()->profile->update(array_merge(

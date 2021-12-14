@@ -5,7 +5,8 @@
 <div class="row">
     <div class="col-5">
         <div class="col-1">
-            <img src="/media/photo.jpg" class="rounded-circle" width="250" height="250" object-fit ="cover">
+            {{-- @dd($user->profile->profileImage()) --}}
+            <img src="{{$user->profile->profileImage()}}" class="rounded-circle" width="250" height="250" object-fit ="cover">
         </div>
     </div>
     <div class="col-7 pt-5">
@@ -42,7 +43,7 @@
     @foreach ($user->posts as $item)
 
     <article class="media content-section">
-        <img class="rounded-circle article-img" src="/media/photo.jpg">
+        <img class="rounded-circle article-img" src={{$user->profile->profileImage()}}>
         <div class="media-body">
           <div class="article-metadata">
             <a class="mr-2" href="#">{{ $user->username }}</a>
