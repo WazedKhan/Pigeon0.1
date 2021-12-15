@@ -22,7 +22,10 @@
         <!-- Navbar Right Side -->
         <div class="navbar-nav">
           @if (Auth::check())
-          <a class="nav-item nav-link" href=" {{ route('profile.show',Auth::user()->id??'') }} ">Profile</a>
+          <a class="nav-item nav-link navbar-brand pl-0 pr-0" href=" {{ route('profile.show',Auth::user()->id??'') }} ">
+            <img src="{{ Auth::user()->profile->profileImage()}}" width="30" height="30" class="rounded-circle d-inline-block align-top" alt="Profile Photo">
+            <small>{{Auth::user()->name}}</small>
+          </a>
 
           <a class="nav-item nav-link" href="#">
             <svg xmlns="http://www.w3.org/2000/svg"  width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
