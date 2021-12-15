@@ -56,5 +56,12 @@
 @endforeach
 @endsection
 @section('sidebar')
-    @include('layout.sidebar')
+<div class="card" style="width: 18rem;">
+  <img src="/media/pigeon.jpg" class="card-img-top" alt="pigeon">
+  <div class="card-body">
+    <h5 class="card-title">Pigeon</h5>
+    <p class="card-text">Pigeon is a secure social networking platform. We care about your privacy.</p>
+    <a href=" {{ route('login') }} " class="btn btn-primary">Join Now</a>
+  </div>
+</div>
 @endsection
