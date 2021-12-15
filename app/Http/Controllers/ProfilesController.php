@@ -29,7 +29,7 @@ class ProfilesController extends Controller
         $data = request()->validate([
             'title' => 'required',
             'details' => 'required',
-            'url' => 'url',
+            'url' => '',
             'image' => '',
         ]);
 
