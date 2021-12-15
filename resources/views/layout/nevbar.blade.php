@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
     <div class="container">
-      <a class="navbar-brand mr-4" href=" {{ route('post.home') }} ">Pigeon</a>
+      <a class="navbar-brand mr-4" href=" {{ route('home') }} ">Pigeon</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>

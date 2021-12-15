@@ -8,11 +8,12 @@ use App\Http\Controllers\AnonymousController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
-Route::get('/', [PostController::class,'index'])->name('post.home');
+Route::get('/', [HomeController::class,'post'])->name('home');
 
 
 
 Route::prefix('post')->group(function () {
+    Route::get('/', [PostController::class,'index'])->name('post.home');
     Route::get('/create/', [PostController::class,'create'])->name('post.create');
     Route::post('/store/', [PostController::class,'store'])->name('post'); 
     Route::get('/{post_id}', [PostController::class, 'detailView'])->name('post.detail');

@@ -10,6 +10,25 @@
                 <div class="row">
                     <h1>Add New Post</h1>
                 </div>
+
+
+                
+                <div class="form-group row ">
+                    <label for="caption" class="col-md-4 col-form-label">Select Audience </label>
+                    <select class="custom-select" id="postType" name="type">
+                      <option value="public" selected>Public</option>
+                      <option value="logged">Logged In</option>
+                    </select>
+                      
+
+                    @if ($errors->has('type'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('caption') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+
                 <div class="form-group row">
                     <label for="caption" class="col-md-4 col-form-label">Post Caption</label>
 
