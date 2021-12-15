@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Anonymous;
 use App\Models\Post;
+use App\Models\User;
 
 class AnonymousController extends Controller
 {
@@ -27,17 +28,15 @@ class AnonymousController extends Controller
         ]);
         return redirect()->route('anonymous.index');
     }
-    public function search(Request $request){
-        // Get the search value from the request
-        $search = $request->input('search');
-    
-        // Search in the title and body columns from the posts table
-        $posts = Post::query()
-            ->where('title', 'LIKE', "%{$search}%")
-            ->orWhere('body', 'LIKE', "%{$search}%")
+
+    public function search(Request $request)
+    {
+        $user = User::where('name', '=', $request->input('search'))
+            ->orderBy('updated_at', 'desc')
             ->get();
-    
+        
+        dd($user);
         // Return the search view with the resluts compacted
-        return view('search', compact('posts'));
+        return view('search', compact('user'));
     }
 }

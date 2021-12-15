@@ -39,8 +39,11 @@ Route::prefix('/anonymous')->group(function () {
     Route::get('/', [AnonymousController::class, 'index'])->name('anonymous.index');
     Route::get('/create', [AnonymousController::class, 'create'])->name('anonymous.create');
     Route::post('/store', [AnonymousController::class, 'store'])->name('anonymous.store');
-    Route::post('/search/result/',[AnonymousController::class, 'search'])->name('search');
 });
+
+// Searching Routes 
+
+Route::get('/search/',[AnonymousController::class, 'search'])->name('search');
 
 Route::prefix('/admin/')->group(function () {
     Route::get('/', [AdminController::class, 'index']);//->name('anonymous.index');

@@ -13,7 +13,7 @@
             <img src="/media/anon.png" width="30" height="30" class="rounded-circle d-inline-block align-top" alt="Anonymous">
           </a>
           <form class="form-inline my-2 my-lg-0 pl-5" action="{{ route('search') }}" method="GET">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn btn-secondary" type="submit">Search</button>
           </form>
           
