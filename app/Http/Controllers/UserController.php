@@ -36,15 +36,13 @@ class UserController extends Controller
     }
     public function signIn(Request $request)
     {
-        //dd($request->all());
-        //dd(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']]));   
         if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']]))
         {
             return redirect()->route('post.home');
         }
         else
         {
-            return redirect()->back();
+            return redirect()->back()->with('Barta', 'Login Failed! +_+');
         }
     }
     // Login func

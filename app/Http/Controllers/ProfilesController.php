@@ -18,9 +18,9 @@ class ProfilesController extends Controller
     {
         $user = User::find($user);
         $this->authorize('update', $user->profile);
-        //dd($user->id);
         return view('profiles.edit',compact('user'));
     }
+
 
     public function update($user)
     {
@@ -42,7 +42,7 @@ class ProfilesController extends Controller
             $data,
             $imageArray ?? [],
         ));
-
+        
         return redirect("profile/{$user->id}");
     }
 }
