@@ -35,8 +35,6 @@ class AnonymousController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
         
-        dd($user);
-        // Return the search view with the resluts compacted
-        return view('search', compact('user'));
+        return view('search.search_res', compact('user'));
     }
 }
