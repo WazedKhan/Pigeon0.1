@@ -9,6 +9,12 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+{
+      $this->middleware('auth');
+}
+
     public function index()
     {
         $post = Post::orderBy('updated_at', 'desc')->get();
@@ -28,9 +34,10 @@ class PostController extends Controller
         {
             $imagePath='Null';
         }
-        //dd(request('image')->store('media','public'));
+        //dd(request()->all());
         Post::create([
             'caption' => request('caption'), 
+            'type' => request('type'),
             'image' => $imagePath, 
             'user_id' => Auth::id()
         ]);
