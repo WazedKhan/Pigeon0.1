@@ -24,9 +24,9 @@ class FollowController extends Controller
 
     public function unFollow($user)
     {
-        $book = User::find(1);
+        $unfollow = User::find($user);
 
-        $book->following()->detach(Auth::user()->id);
+        $unfollow->following()->detach(Auth::user()->id);
         return redirect()->back();
     }
 }

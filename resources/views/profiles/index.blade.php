@@ -14,12 +14,17 @@
             <div class="row justify-content">
                 <div><h2> {{$user->username}} </h2></div>
                 @if (Auth::user()->id != $user->id)
-                <div class="col-auto">
-                    <a class="btn btn-info m-1" href="{{ route('follow',$user->id) }}">Follow </a>
-                </div> 
-                <div class="col-auto">
-                    <a class="btn btn-info m-1" href="{{ route('unfollow',$user->id) }}">Unfollw</a>
-                </div>
+
+                    @if (Auth::user()->profile->followers->contains($user->id))
+                        <div class="col-auto">
+                            <a class="btn btn-info m-1" href="{{ route('unfollow',$user->id) }}">Unfollw</a>
+                        </div>
+                    @else
+                        <div class="col-auto">
+                            <a class="btn btn-info m-1" href="{{ route('follow',$user->id) }}">Follow </a>
+                        </div>
+                    @endif
+
                 @endif
             </div>
         </div>
