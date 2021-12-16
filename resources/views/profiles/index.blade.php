@@ -10,11 +10,23 @@
         </div>
     </div>
     <div class="col-7 pt-5">
-        <div><h2> {{$user->username}} </h2></div>
-        <div class="d-flex">
+        <div class="container">
+            <div class="row justify-content">
+                <div><h2> {{$user->username}} </h2></div>
+                @if (Auth::user()->id != $user->id)
+                <div class="col-auto">
+                    <a class="btn btn-info m-1" href="{{ route('follow',$user->id) }}">Follow </a>
+                </div> 
+                <div class="col-auto">
+                    <a class="btn btn-info m-1" href="{{ route('unfollow',$user->id) }}">Unfollw</a>
+                </div>
+                @endif
+            </div>
+        </div>
+        <div class="d-flex pt-2">
             <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
-            <div class="pr-5"><strong>15</strong> followers</div>
-            <div class="pr-5"><strong>98</strong> following</div>
+            <div class="pr-5"><strong> {{ $user->following->count() }} </strong> followers</div>
+            <div class="pr-5"><strong> {{ $user->profile->followers->count() }} </strong> following</div>
         </div>
         <div class="pt-4"><b> {{ $user->profile->title }} </b></div>
         <div> {{ $user->profile->details }} </div>

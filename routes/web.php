@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\AnonymousController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FollowController;
 
 Route::get('/', [HomeController::class,'post'])->name('home');
 
@@ -44,6 +45,10 @@ Route::prefix('/anonymous')->group(function () {
 // Searching Routes 
 
 Route::get('/search/',[AnonymousController::class, 'search'])->name('search');
+
+// Following Routes 
+Route::get('/follow/{user_id}', [FollowController::class, 'addFollow'])->name('follow');
+Route::get('/unfollow/{user_id}', [FollowController::class, 'unFollow'])->name('unfollow');
 
 Route::prefix('/admin/')->group(function () {
     Route::get('/', [AdminController::class, 'index']);//->name('anonymous.index');
