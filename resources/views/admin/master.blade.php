@@ -7,9 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css" "
+    <link rel="stylesheet" href="/css/bootstrap.min.css"
         crossorigin="anonymous">
     <link href="/css/admin.css" rel="stylesheet">
+    <link href="/css/fontawesome.min.css" rel="stylesheet">
+    <link href="/css/fontawesome.css" rel="stylesheet">
  
 
 </head>
@@ -22,14 +24,15 @@
   <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
       <div class="sidebar-brand">
-        <a href="#">pro sidebar</a>
+        <a href="#">Admin</a>
         <div id="close-sidebar">
           <i class="fas fa-times"></i>
         </div>
       </div>
       <div class="sidebar-header">
         <div class="user-pic">
-          <img class="img-responsive img-rounded" src="{{ Auth::user()->profile->image?? '/media/photo.jpg' }}"
+          {{-- {{ Auth::user()->profile->image?? '/media/photo.jpg' }} --}}
+          <img class="img-responsive img-rounded" src="{{Auth::user()->profile->profileImage()}}"
             alt="User picture">
         </div>
         <div class="user-info">
@@ -86,50 +89,16 @@
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fa fa-shopping-cart"></i>
-              <span>E-commerce</span>
+              <i class="fas fa-blog"></i>
+              <span>Posts</span>
               <span class="badge badge-pill badge-danger">3</span>
             </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Products
-
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Orders</a>
-                </li>
-                <li>
-                  <a href="#">Credit cart</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="far fa-gem"></i>
-              <span>Components</span>
+              <span>Users</span>
             </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">General</a>
-                </li>
-                <li>
-                  <a href="#">Panels</a>
-                </li>
-                <li>
-                  <a href="#">Tables</a>
-                </li>
-                <li>
-                  <a href="#">Icons</a>
-                </li>
-                <li>
-                  <a href="#">Forms</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
@@ -140,18 +109,8 @@
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fa fa-globe"></i>
-              <span>Maps</span>
+              <span>Reports - Posts</span>
             </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Google maps</a>
-                </li>
-                <li>
-                  <a href="#">Open street map</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li class="header-menu">
             <span>Extra</span>
