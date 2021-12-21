@@ -88,7 +88,7 @@
             </div>
           </li>
           <li class="sidebar-dropdown">
-            <a href="#">
+            <a href=" {{route('admin.posts')}} ">
               <i class="fas fa-blog"></i>
               <span>Posts</span>
               <span class="badge badge-pill badge-danger">3</span>
