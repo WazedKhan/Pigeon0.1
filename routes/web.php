@@ -17,7 +17,9 @@ Route::prefix('post')->group(function () {
     Route::get('/', [PostController::class,'index'])->name('post.home');
     Route::get('/create/', [PostController::class,'create'])->name('post.create');
     Route::post('/store/', [PostController::class,'store'])->name('post'); 
-    Route::get('/{post_id}', [PostController::class, 'detailView'])->name('post.detail');
+    Route::get('/{post_id}/', [PostController::class, 'detailView'])->name('post.detail');
+    Route::get('/view/{post_id}', [PostController::class, 'updateView'])->name('post.updateView');
+    Route::patch('/view/{post_id}/update', [PostController::class, 'update'])->name('post.update');
 });
 
 
