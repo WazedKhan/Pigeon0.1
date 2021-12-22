@@ -20,6 +20,7 @@ Route::prefix('post')->group(function () {
     Route::get('/{post_id}/', [PostController::class, 'detailView'])->name('post.detail');
     Route::get('/view/{post_id}', [PostController::class, 'updateView'])->name('post.updateView');
     Route::patch('/view/{post_id}/update', [PostController::class, 'update'])->name('post.update');
+    Route::get('/kill/{post_id}/', [PostController::class, 'delete'])->name('post.delete');
 });
 
 
