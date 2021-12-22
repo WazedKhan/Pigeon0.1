@@ -56,6 +56,9 @@
 @endforeach
 @endsection
 @section('sidebar')
+@if (Auth::check())
+    @include('layout.sidebar')
+@else
 <div class="card" style="width: 18rem;">
   <img src="/media/pigeon.jpg" class="card-img-top" alt="pigeon">
   <div class="card-body">
@@ -64,4 +67,5 @@
     <a href=" {{ route('login') }} " class="btn btn-primary">Join Now</a>
   </div>
 </div>
+@endif
 @endsection
