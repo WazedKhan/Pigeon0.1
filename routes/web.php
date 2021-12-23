@@ -54,6 +54,6 @@ Route::get('/follow/{user_id}', [FollowController::class, 'addFollow'])->name('f
 Route::get('/unfollow/{user_id}', [FollowController::class, 'unFollow'])->name('unfollow');
 
 Route::prefix('/admin/')->group(function () {
-    Route::get('/dashbord', [AdminController::class, 'index'])->name('admin.home');
+    Route::get('/', [AdminController::class, 'index'])->name('admin.home');
     Route::get('/posts', [AdminController::class, 'posts'])->name('admin.posts');//->name('anonymous.index');
 });

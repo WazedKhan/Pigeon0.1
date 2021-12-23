@@ -3,7 +3,9 @@ body {
     color: #333333;
     margin-top: 5rem;
   }
-  
+  .container{
+    width: 73% !important;
+  }
   h1, h2, h3, h4, h5, h6 {
     color: #444444;
   }
@@ -91,4 +93,11 @@ body {
     top: 0;
     align-self: flex-start; /* <-- this is the fix */
     background-color: red;  /* Not necessary -- for example only */
+  }
+
+
+  .img-fluid{
+    height: 100% !important;
+    
+width: 100% !important;
   }

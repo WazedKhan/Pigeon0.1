@@ -1,0 +1,31 @@
+
+    /* for the card title section */
+
+    .icon{
+
+        align-items: center !importanr;
+        
+        /* align-items: center !important; */
+        
+        height: 100px;
+        
+        background-color: #eddede;
+        
+        }
+        
+        .custom-icon{
+            
+        margin-left: 37%;
+            
+        /* align-items: center !important; */
+            
+        margin-top: 4%;
+            
+        font-size: 81px;
+          }
+
+          .grid-container{
+              display: grid;
+              grid-template-columns: 33.33% 33.33% 33.33%;
+              grid-column-gap: ;
+          }
