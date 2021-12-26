@@ -66,7 +66,7 @@
             <a class="mr-2" href="#">{{ $user->username }}</a>
             <small class="text-muted">{{$item->updated_at->format('d/m/y')}}</small>
           </div>
-          <p class="article-content">{{ $item->caption }}</p>
+          <p><a class="article-title" href=" {{ route('post.detail',$item->id) }} ">{{$item->caption}}</a></p>
           <div>
             <img src="/storage/{{ $item->image }}" class="img-fluid" alt="Responsive image">
           </div>
