@@ -90,7 +90,7 @@ class PostController extends Controller
     public function like($post_id)
     {
         $likes = Post::find($post_id);
-        if ($likes->liked()->exists()) {
+        if ($likes->liked()->where('user_id',Auth::user()->id)->exists()) {
             $likes->liked()->detach(Auth::user()->id);
             return redirect()->back();
         }
