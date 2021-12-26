@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\Commnet;
 use Illuminate\Auth\Events\Validated;
 
 class PostController extends Controller
@@ -50,7 +51,9 @@ class PostController extends Controller
     {
         $post = Post::find($post_id);
         $like = Like::all();
-        return view('post.detail', compact('post','like'));
+        $comments = Commnet::where('post_id',$post_id)->get();
+        //dd($comment);
+        return view('post.detail', compact('post','like','comments'));
     }
 
     public function updateView($id)
@@ -98,4 +101,21 @@ class PostController extends Controller
         }
     }
     
+    public function commnetCreateV($post_id)
+    {
+        $post = Post::find($post_id);
+        return view('post.comment.view', compact('post'));
+    }
+
+    public function makeComment($post_id)
+    {
+        //dd(request()->all());
+        Commnet::create([
+            'user_id'=>Auth::user()->id,
+            'post_id'=>$post_id,
+            'comment'=>request()->comment
+        ]);
+        return redirect()->route('post.detail',$post_id)
+            ->with('success','Post updated successfully');
+    }
 }

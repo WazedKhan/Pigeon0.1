@@ -22,6 +22,8 @@ Route::prefix('post/')->group(function () {
     Route::patch('/view/{post_id}/update', [PostController::class, 'update'])->name('post.update');
     Route::get('/kill/{post_id}/', [PostController::class, 'delete'])->name('post.delete');
     Route::get('/like/{post_id}/', [PostController::class, 'like'])->name('post.like');
+    Route::get('/{post_id}/form', [PostController::class, 'commnetCreateV'])->name('post.comment');
+    Route::post('/{post_id}/make', [PostController::class, 'makeComment'])->name('post.comment.make');
 });
 
 
