@@ -13,7 +13,7 @@ Route::get('/', [HomeController::class,'post'])->name('home');
 
 
 
-Route::prefix('post')->group(function () {
+Route::prefix('post/')->group(function () {
     Route::get('/', [PostController::class,'index'])->name('post.home');
     Route::get('/create/', [PostController::class,'create'])->name('post.create');
     Route::post('/store/', [PostController::class,'store'])->name('post'); 
@@ -21,6 +21,7 @@ Route::prefix('post')->group(function () {
     Route::get('/view/{post_id}', [PostController::class, 'updateView'])->name('post.updateView');
     Route::patch('/view/{post_id}/update', [PostController::class, 'update'])->name('post.update');
     Route::get('/kill/{post_id}/', [PostController::class, 'delete'])->name('post.delete');
+    Route::get('/like/{post_id}/', [PostController::class, 'like'])->name('post.like');
 });
 
 

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Like;
 use Illuminate\Auth\Events\Validated;
 
 class PostController extends Controller
@@ -47,7 +49,8 @@ class PostController extends Controller
     public function detailView($post_id)
     {
         $post = Post::find($post_id);
-        return view('post.detail', compact('post'));
+        $like = Like::all();
+        return view('post.detail', compact('post','like'));
     }
 
     public function updateView($id)
@@ -79,6 +82,20 @@ class PostController extends Controller
         Post::find($id)->delete();
         return redirect()->route('post.home')
             ->with('success','Post Deleted successfully');
+    }
+
+    public function like($post_id)
+    {
+        $likes = Post::find($post_id);
+        if ($likes->liked()->exists()) {
+            $likes->liked()->detach(Auth::user()->id);
+            return redirect()->back();
+        }
+        else
+        {
+            $likes->liked()->attach(Auth::user()->id);
+            return redirect()->back();
+        }
     }
     
 }
