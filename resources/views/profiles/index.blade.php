@@ -1,7 +1,6 @@
 @extends('layout.base')
 
 @section('content')
-
 <div class="row">
     <div class="col-5">
         <div class="col-1">
@@ -30,7 +29,7 @@
         </div>
         <div class="d-flex pt-2">
             <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
-            <div class="pr-5"><strong> {{ $user->following->count() }} </strong> followers</div>
+            <div class="pr-5"><strong> <a href=" {{route('profile.followers', $user->id,)}} "> {{ $user->following->count() }} </strong> followers</a></div>
             <div class="pr-5"><strong> {{ $user->profile->followers->count() }} </strong> following</div>
         </div>
         <div class="pt-4"><b> {{ $user->profile->title }} </b></div>

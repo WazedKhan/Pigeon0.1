@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Follow;
 
 class ProfilesController extends Controller
 {
@@ -50,4 +52,16 @@ class ProfilesController extends Controller
         
         return redirect("profile/{$user->id}");
     }
+
+    public function friends($user_id)
+    {
+        
+        // $followers = $followers->followers()->id;
+        $followers = Follow::where('user_id',$user_id)->get('profile_id');
+        $user = User::find($followers);
+        // dd($user);
+        return view('profiles.firends', compact('user'));
+    }
+
+    
 }
