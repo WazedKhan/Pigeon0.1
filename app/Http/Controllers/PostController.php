@@ -118,4 +118,8 @@ class PostController extends Controller
         return redirect()->route('post.detail',$post_id)
             ->with('success','Post updated successfully');
     }
+    public function postLiked()
+    {
+        //
+    }
 }
