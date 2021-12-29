@@ -8,6 +8,7 @@ use App\Http\Controllers\AnonymousController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\ExtraFeature;
 
 Route::get('/', [HomeController::class,'post'])->name('home');
 
@@ -51,7 +52,7 @@ Route::prefix('/anonymous')->group(function () {
 
 // Searching Routes 
 
-Route::get('/search/',[AnonymousController::class, 'search'])->name('search');
+Route::get('/search/',[ExtraFeature::class, 'search'])->name('search');
 
 // Following Routes 
 Route::get('/follow/{user_id}', [FollowController::class, 'addFollow'])->name('follow');
