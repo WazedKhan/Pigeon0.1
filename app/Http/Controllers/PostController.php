@@ -31,6 +31,13 @@ class PostController extends Controller
 
     public function store()
     {
+        
+        $hello =request()->caption;
+        $hello = str_replace(' ', '_', $hello);
+        $command = escapeshellcmd('python '.getcwd().'/python/main.py '.$hello);
+        $output = shell_exec($command);
+        //dd($output);
+
         if(request('image')){
             $imagePath = request('image')->store('media/posts','public');
         }
@@ -42,7 +49,8 @@ class PostController extends Controller
             'caption' => request('caption'), 
             'type' => request('type'),
             'image' => $imagePath, 
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
+            'emotion'=>$output
         ]);
         return redirect()->route('post.home')->with('success','Post Created Successfully!');
     }
