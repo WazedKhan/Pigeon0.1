@@ -10,7 +10,7 @@
         <div class="article-metadata">
           <a class="mr-2" href="{{ route('profile.show',$item->user->id) }}"> {{$item->user->name}} </a>
           <div>
-            <small class="text-muted"> {{$item->updated_at->format('d-m-y')}} </small>
+            <small class="text-muted"> {{$item->updated_at->format('d-m-y')}} </small> | </small><span class="badge badge-info text-center">{{$item->emotion}}</span>
           </div>
 
         </div>
