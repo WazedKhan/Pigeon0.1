@@ -14,14 +14,24 @@
           </div>
 
         </div>
+        @if ($item->image == 'Null')
+          <div class="card bg-dark text-white">
+            <img src="/media/blur.jpg" class="card-img " width="20px" alt="...">
+            <div class="card-img-overlay">
+              <h5 class="card-title text-center text-lg-center colored">
+                <a class="article-title text-center" href=" {{ route('post.detail',$item->id) }} ">{{$item->caption}}</a>
+              </h5>
+            </div>
+          </div>
+        @else
         <p><a class="article-title" href=" {{ route('post.detail',$item->id) }} ">{{$item->caption}}</a></p>
-
+        @endif
         {{-- <p class="article-content"> <a href=""></a> </strong></p> --}}
-
-        <div>
-          <img src="/storage/{{ $item->image }}" class="img-fluid" alt="Responsive image">
-        </div>
-
+        @if ($item->image != 'Null')
+          <div>
+            <img src="/storage/{{ $item->image }}" class="img-fluid" alt="Responsive image">
+          </div>
+        @endif
         <div class="row pl-3">
           <a href="#"> {{$item->liked->count()}} 💖</a> 
         </div>
