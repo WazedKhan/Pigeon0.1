@@ -17,7 +17,12 @@ class ExtraFeature extends Controller
 
     public function suggest()
     {
-        $people = User::paginate(2);
+        $hello = ' world';
+        $command = escapeshellcmd('python '.getcwd().'/python/main.py '.$hello);
+        $output = shell_exec($command);
+        dd($output);
+        dd('python '.getcwd().'/python/main.py'.$hello);
+        $people = User::paginate(5);
         return view('profiles.find_firend', compact('people'));
     }
 
