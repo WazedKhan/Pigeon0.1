@@ -13,5 +13,5 @@ result = model.predict([ex1])
 result = ''.join(map(str, result))
 
 
-print(result,end="")
+print(result.capitalize(),end="")
 
