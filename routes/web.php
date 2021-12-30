@@ -57,6 +57,7 @@ Route::get('/search/',[ExtraFeature::class, 'search'])->name('search');
 // Following Routes 
 Route::get('/follow/{user_id}', [FollowController::class, 'addFollow'])->name('follow');
 Route::get('/unfollow/{user_id}', [FollowController::class, 'unFollow'])->name('unfollow');
+Route::get('friends/suggestions',[ExtraFeature::class, 'suggest'])->name('suggest');
 
 Route::prefix('/admin/')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.home');
