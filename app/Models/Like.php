@@ -9,6 +9,7 @@ class Like extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $table='post_user';
     
     public function user()
     {
