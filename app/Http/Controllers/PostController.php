@@ -10,7 +10,7 @@ use App\Models\Like;
 use App\Models\Commnet;
 use Illuminate\Auth\Events\Validated;
 
-class PostController extends Controller
+class   PostController extends Controller
 {
 
     public function __construct()
@@ -58,10 +58,8 @@ class PostController extends Controller
     public function detailView($post_id)
     {
         $post = Post::find($post_id);
-        $like = Like::all();
         $comments = Commnet::where('post_id',$post_id)->get();
-        //dd($comment);
-        return view('post.detail', compact('post','like','comments'));
+        return view('post.detail', compact('post','comments'));
     }
 
     public function updateView($id)
@@ -126,8 +124,10 @@ class PostController extends Controller
         return redirect()->route('post.detail',$post_id)
             ->with('success','Post updated successfully');
     }
-    public function postLiked()
+    public function viewLikes($post_id)
     {
-        //
+        $ids = Like::where('post_id', $post_id)->get('user_id');
+        $like_list = User::find($ids);
+        return view('post.likes', compact('like_list'));
     }
 }
