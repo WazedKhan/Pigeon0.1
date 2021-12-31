@@ -2,9 +2,6 @@
 @section('content')
 <article class="media content-section">
   <div class="media-body">
-    <div class="article-metadata">
-      <p><a class="article-title" href=" {{ route('post.detail',$post->id) }} ">{{$post->caption}}</a></p>
-    </div>
     @if ($post->image == 'Null')
           <div class="card bg-dark text-white">
             <img src="/media/blur.jpg" class="card-img " width="20px" alt="...">
@@ -39,7 +36,7 @@
       <a href=" {{ route('post.delete', $post->id) }} " class="badge badge-danger">Delete</a>    
     @endif
     <div class="row pl-3">
-      <a href="http://"> {{$post->liked->count()}} 💖</a> |       
+      <a href="{{route('post.likers',$post->id)}}"> {{$post->liked->count()}} 💖</a> |       
 
       <a href="http://"> 💬{{$comments->count()}} Comments </a> 
     </div>
@@ -70,7 +67,11 @@
   </div>
   @foreach ($comments as $comment)
       <ul class="list-group m-1">
-        <li class="list-group-item "> <a href="{{ route('profile.show',$post->user->profile->id) }}"> <small><strong>{{$comment->user->name}}:</strong></small> </a> {{$comment->comment}} </li>
+        <li class="list-group-item "> 
+          <a href="{{ route('profile.show',$post->user->profile->id) }}"> 
+            <small><strong>{{$comment->user->name}}:</strong></small> 
+          </a> {{$comment->comment}} 
+        </li>
       </ul>
   @endforeach
   <ul class="list-group m-1">

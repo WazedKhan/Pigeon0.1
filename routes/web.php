@@ -25,6 +25,7 @@ Route::prefix('post/')->group(function () {
     Route::get('/like/{post_id}/', [PostController::class, 'like'])->name('post.like');
     Route::get('/{post_id}/form', [PostController::class, 'commnetCreateV'])->name('post.comment');
     Route::post('/{post_id}/make', [PostController::class, 'makeComment'])->name('post.comment.make');
+    Route::get('/like/{post_id}/list', [PostController::class, 'viewLikes'])->name('post.likers');
 });
 
 
