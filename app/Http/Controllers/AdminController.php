@@ -13,11 +13,6 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
-    {
-        $data = User::all();
-        return view('admin.user.dashboard', compact('data'));
-    }
 
     public function posts()
     {

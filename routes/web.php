@@ -9,6 +9,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ExtraFeature;
+// Admin Controller 
+use App\Http\Controllers\Admin\UserController as Users;
+
 
 Route::get('/', [HomeController::class,'post'])->name('home');
 
@@ -61,6 +64,9 @@ Route::get('/unfollow/{user_id}', [FollowController::class, 'unFollow'])->name('
 Route::get('friends/suggestions',[ExtraFeature::class, 'suggest'])->name('suggest');
 
 Route::prefix('/admin/')->group(function () {
+    // users functions
     Route::get('/', [AdminController::class, 'index'])->name('admin.home');
-    Route::get('/posts', [AdminController::class, 'posts'])->name('admin.posts');//->name('anonymous.index');
+    Route::get('/posts', [AdminController::class, 'posts'])->name('admin.posts');
+    Route::get('/user', [Users::class, 'index'])->name('admin.user.index');
+    Route::patch('/user/status/{id}', [Users::class, 'status'])->name('admin.user.changeStatus');
 });
