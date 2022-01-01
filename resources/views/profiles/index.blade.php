@@ -1,6 +1,7 @@
 @extends('layout.base')
 
 @section('content')
+@if($user->status != 'block')
 <div class="row">
     <div class="col-5">
         <div class="col-1">
@@ -89,7 +90,9 @@
     @endforeach
 </div>
 
-
+@else
+    <H1>Profile Has been Banned</H1>
+@endif
 @section('sidebar')
     @include('layout.sidebar')
 @endsection
