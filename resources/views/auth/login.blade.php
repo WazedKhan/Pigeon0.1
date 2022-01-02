@@ -1,6 +1,10 @@
 @extends('layout.base')
 @section('content')
-
+@if(session()->has('Block'))
+  <p class="alert alert-danger">
+      {{session()->get('Block')}}
+  </p>
+@endif
 <form action="{{route("signin")}}" method="POST">
     @csrf
     <div class="form-group">

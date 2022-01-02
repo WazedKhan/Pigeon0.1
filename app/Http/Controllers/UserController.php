@@ -38,7 +38,15 @@ class UserController extends Controller
     {
         if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']]))
         {
-            return redirect()->route('post.home');
+            if(Auth::user()->status=="block")
+            {
+                return redirect()->back()->with("Block","Your Account has been Block");
+                Auth::logout(Auth::user());
+            }
+            else
+            {
+                return redirect()->route('post.home');
+            }
         }
         else
         {

@@ -3,11 +3,11 @@
     <h1>New User List</h1>
 @endsection
 @section('content')
-@if(session()->has('notice'))
-        <p class="alert alert-success">
-            {{session()->get('notice')}}
-        </p>
-    @endif
+  @if(session()->has('notice'))
+          <p class="alert alert-success">
+              {{session()->get('notice')}}
+          </p>
+  @endif
 <div class="my-3 p-3 bg-body rounded shadow-sm">
     @foreach ($data as $item)
     <div class="d-flex text-muted pt-3">
