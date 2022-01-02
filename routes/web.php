@@ -11,6 +11,7 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ExtraFeature;
 // Admin Controller 
 use App\Http\Controllers\Admin\UserController as Users;
+use App\Http\Controllers\Admin\ReportController;
 
 
 Route::get('/', [HomeController::class,'post'])->name('home');
@@ -29,6 +30,7 @@ Route::prefix('post/')->group(function () {
     Route::get('/{post_id}/form', [PostController::class, 'commnetCreateV'])->name('post.comment');
     Route::post('/{post_id}/make', [PostController::class, 'makeComment'])->name('post.comment.make');
     Route::get('/like/{post_id}/list', [PostController::class, 'viewLikes'])->name('post.likers');
+    Route::post('/post/report/{post_id}', [ReportController::class, 'post_report'])->name('post.report');
 });
 
 

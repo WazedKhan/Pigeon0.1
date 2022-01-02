@@ -10,7 +10,12 @@
       <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
         <div class="d-flex justify-content-between">
           <strong class="text-gray-dark"><span>Post Caption: </span> {{$item->caption}} </strong>
-          <a href="#">Action</a>
+          <div>
+            <select name="" id="">Action
+              <option value="">Hide</option>
+              <option value="">Delete</option>
+            </select>
+          </div>
         </div>
         <p class="m-0 m"> <strong>User Name: </strong>{{$item->user->username}}</p>
         <p class="m-0"> <strong>Created At: </strong>{{$item->created_at}} </p>
