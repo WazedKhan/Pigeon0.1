@@ -66,7 +66,7 @@
             <span>General</span>
           </li>
           <li class="sidebar-dropdown">
-            <a href="#">
+            <a href=" {{route('admin.home')}} ">
               <i class="fa fa-tachometer-alt"></i>
               <span>Dashboard</span>
               <span class="badge badge-pill badge-warning">New</span>
@@ -76,7 +76,6 @@
             <a href=" {{route('admin.posts')}} ">
               <i class="fas fa-blog"></i>
               <span>Posts</span>
-              <span class="badge badge-pill badge-danger">3</span>
             </a>
           </li>
           <li class="sidebar-dropdown">
@@ -95,6 +94,7 @@
             <a href="#">
               <i class="fa fa-globe"></i>
               <span>Reports - Posts</span>
+              <span class="badge badge-pill badge-danger"> 125 </span>
             </a>
           </li>
           <li class="header-menu">

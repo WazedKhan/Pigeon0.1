@@ -38,7 +38,9 @@
     <div class="row pl-3">
       <a href="{{route('post.likers',$post->id)}}"> {{$post->liked->count()}} 💖</a> |       
 
-      <a href="http://"> 💬{{$comments->count()}} Comments </a> 
+      <a href="http://"> 💬{{$comments->count()}} Comments </a> |
+
+      <p class="">{{$report->count()}} Report on this post</p>
     </div>
   </div>
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\Report;
 use App\Models\Commnet;
 use Illuminate\Auth\Events\Validated;
 
@@ -58,8 +59,9 @@ class   PostController extends Controller
     public function detailView($post_id)
     {
         $post = Post::find($post_id);
+        $report = Report::find($post_id);
         $comments = Commnet::where('post_id',$post_id)->get();
-        return view('post.detail', compact('post','comments'));
+        return view('post.detail', compact('post','comments','report'));
     }
 
     public function updateView($id)

@@ -20,4 +20,10 @@ class ReportController extends Controller
         ]);
         return redirect()->back();
     }
+
+    public function reports()
+    {
+        $list_ = Report::all();
+        return view('admin.master', compact('list_'));
+    }
 }
