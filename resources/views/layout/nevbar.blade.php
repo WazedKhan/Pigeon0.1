@@ -7,7 +7,7 @@
       <div class="collapse navbar-collapse" id="navbarToggle">
         <div class="navbar-nav mr-auto">
           <a class="nav-item nav-link" href=" {{ route('post.home') }} ">Home</a>
-          <a class="nav-item nav-link" href="#">About</a>
+          <a class="nav-item nav-link" href=" {{ route('suggest') }} "><i class="fas fa-person-booth text-decoration-none"> Find Buddy's</i></a>
 
           <a class="navbar-brand pl-5" href=" {{route('anonymous.index')}} ">
             <img src="/media/anon.png" width="30" height="30" class="rounded-circle d-inline-block align-top" alt="Anonymous">

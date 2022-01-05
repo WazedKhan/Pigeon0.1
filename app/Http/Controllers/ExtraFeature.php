@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -17,7 +18,7 @@ class ExtraFeature extends Controller
 
     public function suggest()
     {
-        $people = User::paginate(5);
+        $people = User::where('id','!=',Auth::user()->id)->paginate(5);
         return view('profiles.find_firend', compact('people'));
     }
 
