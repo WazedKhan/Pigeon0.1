@@ -21,9 +21,17 @@ class ReportController extends Controller
         return redirect()->back();
     }
 
-    public function reports()
+    public function reports_view()
     {
-        $list_ = Report::all();
-        return view('admin.master', compact('list_'));
+        $reports = Report::all();
+        return view('admin.user.report', compact('reports'));
+    }
+    public function report_create()
+    {
+        Report::create([
+            'user_id'=>Auth::user()->id,
+            'report'=>request()->report
+        ]);
+        return redirect()->back();
     }
 }
