@@ -71,4 +71,5 @@ Route::prefix('/admin/')->group(function () {
     Route::get('/posts', [AdminController::class, 'posts'])->name('admin.posts');
     Route::get('/user', [Users::class, 'index'])->name('admin.user.index');
     Route::patch('/user/status/{id}', [Users::class, 'status'])->name('admin.user.changeStatus');
+    Route::get('post/report/', [ReportController::class,'reports'])->name('admin.post.report');
 });

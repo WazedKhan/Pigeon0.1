@@ -91,7 +91,7 @@
             </a>
           </li>
           <li class="sidebar-dropdown">
-            <a href="#">
+            <a href=" {{route('admin.post.report')}} ">
               <i class="fa fa-globe"></i>
               <span>Reports - Posts</span>
               <span class="badge badge-pill badge-danger"> 125 </span>
