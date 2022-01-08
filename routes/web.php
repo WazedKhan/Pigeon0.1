@@ -30,7 +30,6 @@ Route::prefix('post/')->group(function () {
     Route::get('/{post_id}/form', [PostController::class, 'commnetCreateV'])->name('post.comment');
     Route::post('/{post_id}/make', [PostController::class, 'makeComment'])->name('post.comment.make');
     Route::get('/like/{post_id}/list', [PostController::class, 'viewLikes'])->name('post.likers');
-    Route::post('/post/report/{post_id}', [ReportController::class, 'post_report'])->name('post.report');
 });
 
 
@@ -71,6 +70,4 @@ Route::prefix('/admin/')->group(function () {
     Route::get('/posts', [AdminController::class, 'posts'])->name('admin.posts');
     Route::get('/user', [Users::class, 'index'])->name('admin.user.index');
     Route::patch('/user/status/{id}', [Users::class, 'status'])->name('admin.user.changeStatus');
-    Route::get('post/report/', [ReportController::class,'reports_view'])->name('admin.report_list');
-    Route::post('report/create', [ReportController::class,'report_create'])->name('admin.report_create');
 });

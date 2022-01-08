@@ -35,30 +35,20 @@
       <a href=" {{ route('post.updateView', $post->id) }} " class="badge badge-dark">Edit</a>
       <a href=" {{ route('post.delete', $post->id) }} " class="badge badge-danger">Delete</a>    
     @endif
-    <div class="row pl-3">
+    <div class="row pl-">
       <a href="{{route('post.likers',$post->id)}}"> {{$post->liked->count()}} 💖</a> |       
-
-      <a href="http://"> 💬{{$comments->count()}} Comments </a> |
-
-      <p class="">{{$report->count()}} Report on this post</p>
+      <a href="http://"> 💬{{$comments->count()}} Comments </a> 
     </div>
   </div>
 
   <div class="d-flex justify-content-around">
     <a class="btn btn-outline-info float-left align-self-center" href="{{ route('post.like', $post->id) }}" role="button">
-      <i class="far fa-heart"> Like</i></a>
-
-
-
-
-
-    <a class="btn btn-outline-danger float-right align-self-center" href="#" role="button" data-toggle="modal" data-target="#exampleModalCenter">
-      <i class="fas fa-times"> Report</i>
+      <i class="far fa-heart"> Like</i>
     </a>
 
-      <a class="btn btn-outline-secondary float-right align-self-center" href="{{ route('post.comment', $post->id) }}" role="button">
-        <i class="far fa-comment-alt"> Comment </i>
-      </a>
+    <a class="btn btn-outline-secondary float-right align-self-center" href="{{ route('post.comment', $post->id) }}" role="button">
+      <i class="far fa-comment-alt"> Comment </i>
+    </a>
   </div>
   @foreach ($comments as $comment)
       <ul class="list-group m-1">
@@ -91,10 +81,16 @@
       <div class="modal-body">
         <form action=" {{route('post.report',$post->id)}} " method="POST">
           @csrf
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Write Your Report</label>
-            <textarea class="form-control" name="report" id="message-text"></textarea>
-          </div>
+
+          @foreach ($report as $item)
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="report" value="1" value=" {{$item->id}} " checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              {{$item->report}}
+            </label>
+          </div> 
+          @endforeach
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Report</button>

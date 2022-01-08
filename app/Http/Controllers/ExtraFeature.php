@@ -8,6 +8,10 @@ use App\Models\User;
 
 class ExtraFeature extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function search(Request $request)
     {
         $user = User::where('name', 'LIKE', '%'.$request->input('search').'%')

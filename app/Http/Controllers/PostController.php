@@ -13,23 +13,26 @@ use Illuminate\Auth\Events\Validated;
 
 class   PostController extends Controller
 {
-
+    // Auth 
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    // Post index view
     public function index()
     {
         $post = Post::latest()->get();
         return view('post.home',compact('post'));
     }
 
+    // Post Create form
     public function create()
     {
         return view('post.create_post');
     }
 
+    // Post Create Method
     public function store()
     {
         
@@ -56,20 +59,23 @@ class   PostController extends Controller
         return redirect()->route('post.home')->with('success','Post Created Successfully!');
     }
 
+    // Post Details View Method
     public function detailView($post_id)
     {
         $post = Post::find($post_id);
-        $report = Report::find($post_id);
+        $report = Report::all();
         $comments = Commnet::where('post_id',$post_id)->get();
         return view('post.detail', compact('post','comments','report'));
     }
 
+    // Post Update Form
     public function updateView($id)
     {
         $post = Post::find($id);
         return view('post.update', compact('post'));
     }
 
+    // Post Update Method
     public function update($id)
     {
         $request = request()->except(['_token','_method']);
@@ -88,6 +94,7 @@ class   PostController extends Controller
             ->with('success','Post updated successfully');
     }
 
+    // Post Delete Method
     public function delete($id)
     {
         Post::find($id)->delete();
@@ -95,6 +102,7 @@ class   PostController extends Controller
             ->with('success','Post Deleted successfully');
     }
 
+    // Post Like Method
     public function like($post_id)
     {
         $likes = Post::find($post_id);
@@ -109,15 +117,16 @@ class   PostController extends Controller
         }
     }
     
+    // Post Comment Method
     public function commnetCreateV($post_id)
     {
         $post = Post::find($post_id);
         return view('post.comment.view', compact('post'));
     }
 
+    // Post Comment Create Method
     public function makeComment($post_id)
     {
-        //dd(request()->all());
         Commnet::create([
             'user_id'=>Auth::user()->id,
             'post_id'=>$post_id,
@@ -126,6 +135,8 @@ class   PostController extends Controller
         return redirect()->route('post.detail',$post_id)
             ->with('success','Post updated successfully');
     }
+
+    // Post Liked People list shows Method
     public function viewLikes($post_id)
     {
         $ids = Like::where('post_id', $post_id)->get('user_id');
