@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ExtraFeature;
+use App\Http\Controllers\ChatController;
 // Admin Controller 
 use App\Http\Controllers\Admin\UserController as Users;
 use App\Http\Controllers\Admin\ReportController;
@@ -64,6 +65,10 @@ Route::get('/follow/{user_id}', [FollowController::class, 'addFollow'])->name('f
 Route::get('/unfollow/{user_id}', [FollowController::class, 'unFollow'])->name('unfollow');
 Route::get('friends/suggestions',[ExtraFeature::class, 'suggest'])->name('suggest');
 
+// Chat
+Route::get('chat/',[ChatController::class,'index'])->name('chat');
+
+// Admin
 Route::prefix('/admin/')->group(function () {
     // users functions
     Route::get('/', [AdminController::class, 'index'])->name('admin.home');

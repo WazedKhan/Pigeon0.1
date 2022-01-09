@@ -79,7 +79,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action=" {{route('post.report',$post->id)}} " method="POST">
+        {{-- <form action=" {{route('post.report',$post->id)}} " method="POST"> --}}
           @csrf
 
           @foreach ($report as $item)

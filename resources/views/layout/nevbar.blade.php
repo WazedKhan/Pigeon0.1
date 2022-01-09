@@ -9,9 +9,10 @@
           <a class="nav-item nav-link" href=" {{ route('post.home') }} ">Home</a>
           <a class="nav-item nav-link align-items-center " href=" {{ route('suggest') }} "><i class="fas fa-person-booth "> Find Buddy's</i></a>
 
-          <a class="navbar-brand pl-5" href=" {{route('anonymous.index')}} ">
+          {{-- <a class="navbar-brand pl-5" href=" {{route('anonymous.index')}} ">
             <img src="/media/anon.png" width="30" height="30" class="rounded-circle d-inline-block align-top" alt="Anonymous">
-          </a>
+          </a> --}}
+          <a class="nav-item nav-link" href=" {{ route('chat') }} "><i class="fas fa-crow">Chat</i></a>
           <form class="form-inline my-2 my-lg-0 pl-5" action="{{ route('search') }}" method="GET">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn btn-secondary" type="submit">Search</button>
