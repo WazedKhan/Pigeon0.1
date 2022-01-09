@@ -40,8 +40,8 @@ class UserController extends Controller
         {
             if(Auth::user()->status=="block")
             {
-                return redirect()->back()->with("Block","Your Account has been Block");
                 Auth::logout(Auth::user());
+                return redirect()->back()->with("Block","Your Account has been Block");
             }
             else
             {
