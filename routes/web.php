@@ -67,6 +67,8 @@ Route::get('friends/suggestions',[ExtraFeature::class, 'suggest'])->name('sugges
 
 // Chat
 Route::get('chat/',[ChatController::class,'index'])->name('chat');
+Route::get('chat/user/{id}',[ChatController::class,'chat'])->name('chat.user');
+Route::post('chat/text/{id}',[ChatController::class,'addText'])->name('chat.text');
 
 // Admin
 Route::prefix('/admin/')->group(function () {

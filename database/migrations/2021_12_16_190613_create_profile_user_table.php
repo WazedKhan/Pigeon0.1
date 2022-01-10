@@ -17,6 +17,9 @@ class CreateProfileUserTable extends Migration
             $table->id();
             $table->unsignedBigInteger('profile_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('sender_id')->nullable();
+            $table->unsignedBigInteger('receiver_id')->nullable();
+            $table->string('text')->nullable();
             $table->timestamps();
         });
     }
