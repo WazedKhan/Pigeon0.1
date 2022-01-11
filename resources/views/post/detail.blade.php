@@ -14,7 +14,6 @@
         @else
         <p><a class="article-title" href=" {{ route('post.detail',$post->id) }} ">{{$post->caption}}</a></p>
         @endif
-        {{-- <p class="article-content"> <a href=""></a> </strong></p> --}}
         @if ($post->image != 'Null')
           <div>
             <img src="/storage/{{ $post->image }}" class="img-fluid" alt="Responsive image">
@@ -31,13 +30,13 @@
     <img src=" {{$post->user->profile->profileImage()}} " class="rounded-circle" width="60" height="60" alt="Profile Image">
     <a class="mr-2 " href="{{ route('profile.show',$post->user->profile->id) }}"> <h3>{{$post->user->name}}</h3> </a>
     <small class="text-muted float-right "> {{$post->updated_at->format('d-m-y')}} </small> <span class="badge badge-primary"> Feeling {{$post->emotion}}</span>
-    @if (Auth::user()->id == $post->user->id)      
+    @if (Auth::user()->id == $post->user->id)
       <a href=" {{ route('post.updateView', $post->id) }} " class="badge badge-dark">Edit</a>
-      <a href=" {{ route('post.delete', $post->id) }} " class="badge badge-danger">Delete</a>    
+      <a href=" {{ route('post.delete', $post->id) }} " class="badge badge-danger">Delete</a>
     @endif
     <div class="row pl-">
-      <a href="{{route('post.likers',$post->id)}}"> {{$post->liked->count()}} 💖</a> |       
-      <a href="http://"> 💬{{$comments->count()}} Comments </a> 
+      <a href="{{route('post.likers',$post->id)}}"> {{$post->liked->count()}} 💖</a> |
+      <a href="http://"> 💬{{$comments->count()}} Comments </a>
     </div>
   </div>
 
@@ -52,10 +51,10 @@
   </div>
   @foreach ($comments as $comment)
       <ul class="list-group m-1">
-        <li class="list-group-item "> 
-          <a href="{{ route('profile.show',$post->user->profile->id) }}"> 
-            <small><strong>{{$comment->user->name}}:</strong></small> 
-          </a> {{$comment->comment}} 
+        <li class="list-group-item ">
+          <a href="{{ route('profile.show',$post->user->profile->id) }}">
+            <small><strong>{{$comment->user->name}}:</strong></small>
+          </a> {{$comment->comment}}
         </li>
       </ul>
   @endforeach
@@ -68,7 +67,6 @@
 
 
 {{-- Modal --}}
-<!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -79,16 +77,14 @@
         </button>
       </div>
       <div class="modal-body">
-        {{-- <form action=" {{route('post.report',$post->id)}} " method="POST"> --}}
           @csrf
-
           @foreach ($report as $item)
           <div class="form-check">
             <input class="form-check-input" type="radio" name="report" value="1" value=" {{$item->id}} " checked>
             <label class="form-check-label" for="flexRadioDefault2">
               {{$item->report}}
             </label>
-          </div> 
+          </div>
           @endforeach
 
           <div class="modal-footer">
