@@ -28,9 +28,11 @@
         @endif
         {{-- <p class="article-content"> <a href=""></a> </strong></p> --}}
         @if ($item->image != 'Null')
-          <div>
-            <img src="/storage/{{ $item->image }}" class="img-fluid" alt="Responsive image">
-          </div>
+        @foreach (explode('|', $item->image) as $image)
+        <div class="m-1">
+            <img src="{{ URL::to('/storage/media/posts/'.$image)}}" class="img-fluid" alt="Responsive image">
+        </div>
+        @endforeach
         @endif
         <div class="row pl-3">
           <a href="#"> {{$item->liked->count()}} 💖</a>

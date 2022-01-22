@@ -13,7 +13,7 @@ use Illuminate\Auth\Events\Validated;
 
 class   PostController extends Controller
 {
-    // Auth 
+    // Auth
     public function __construct()
     {
         $this->middleware('auth');
@@ -35,24 +35,28 @@ class   PostController extends Controller
     // Post Create Method
     public function store()
     {
-        
+        // dd(request()->all());
         $hello =request()->caption;
         $hello = str_replace(' ', '_', $hello);
         $command = escapeshellcmd('python '.getcwd().'/python/main.py '.$hello);
         $output = shell_exec($command);
-        //dd($output);
 
-        if(request('image')){
-            $imagePath = request('image')->store('media/posts','public');
+        $images=array();
+        if($files=request()->file('image')){
+        foreach($files as $file){
+            $name=$file->getClientOriginalName();
+            $file->move('storage\media\posts',$name);
+            $images[]=$name;
         }
+    }
         else
         {
-            $imagePath='Null';
+            $images='Null';
         }
         Post::create([
-            'caption' => request('caption'), 
+            'caption' => request('caption'),
             'type' => request('type'),
-            'image' => $imagePath, 
+            'image' => implode("|",$images),
             'user_id' => Auth::id(),
             'emotion'=>$output
         ]);
@@ -82,7 +86,7 @@ class   PostController extends Controller
 
         $post = Post::find($id);
         if(request('image')){
-            $image_path  = request('image')->store('/storage/profile','public');
+            $image_path  = request('image')->store('/media/posts','public');
             $imageArray = ['image'=>$image_path];
         }
         $post->update(array_merge(
@@ -116,7 +120,7 @@ class   PostController extends Controller
             return redirect()->back();
         }
     }
-    
+
     // Post Comment Method
     public function commnetCreateV($post_id)
     {

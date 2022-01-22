@@ -12,14 +12,14 @@
                 </div>
 
 
-                
+
                 <div class="form-group row ">
                     <label for="caption" class="col-md-4 col-form-label">Select Audience </label>
                     <select class="custom-select" id="postType" name="type">
                       <option value="public" selected>Public</option>
                       <option value="logged">Logged In</option>
                     </select>
-                      
+
 
                     @if ($errors->has('type'))
                         <span class="invalid-feedback" role="alert">
@@ -49,7 +49,7 @@
                 <div class="row">
                     <label for="image" class="col-md-4 col-form-label">Post Image</label>
 
-                    <input type="file" class="form-control-file" id="image" name="image">
+                    <input required type="file" class="form-control" name="image[]" placeholder="address" multiple>
 
                     @if ($errors->has('image'))
                         <strong>{{ $errors->first('image') }}</strong>
