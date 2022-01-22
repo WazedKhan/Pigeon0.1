@@ -42,13 +42,15 @@ class   PostController extends Controller
         $output = shell_exec($command);
 
         $images=array();
-        if($files=request()->file('image')){
-        foreach($files as $file){
-            $name=$file->getClientOriginalName();
-            $file->move('storage\media\posts',$name);
-            $images[]=$name;
+        if($files=request()->file('image'))
+        {
+            foreach($files as $file)
+                {
+                    $name=$file->getClientOriginalName();
+                    $file->move('storage\media\posts',$name);
+                    $images[]=$name;
+                }
         }
-    }
         else
         {
             $images='Null';
