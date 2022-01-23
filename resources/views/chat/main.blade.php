@@ -24,7 +24,7 @@
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active m-1">
                             <div class="d-flex w-100 justify-content-between">
                                 <strong class="mb-1">{{ $item->user->name }}</strong>
-                                <small><span class="badge badge-light">{{ $item->created_at->format('h:i A') }}</span></small>
+                                <small><span class="badge badge-light">{{ $item->created_at->diffforhumans() }}</span></small>
                             </div>
                             <p class="mb-1">{{ $item->message }}</p>
                             <small><span><span class="badge badge-secondary">seen</span></span></small>
@@ -33,7 +33,7 @@
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start m-2">
                             <div class="d-flex w-100 justify-content-between">
                                 <strong class="mb-1">{{ $item->user->name }}</strong>
-                                <small><span class="badge badge-light">{{ $item->created_at->format('h:i A') }}</span></small>
+                                <small><span class="badge badge-light">{{ $item->created_at->diffforhumans() }}</span></small>
                             </div>
                             <p class="mb-1">{{ $item->message }}</p>
                             <small><span><span class="badge badge-secondary">seen</span></span></small>
