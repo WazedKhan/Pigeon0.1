@@ -39,7 +39,7 @@
         @can('update', $user->profile)
         <div class="float-right ">
             <a href=" {{route('profile.edit', $user->id)}} " class="" role="button" aria-pressed="true">
-                
+
                 {{-- SVG icon code here --}}
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
                     <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
@@ -80,9 +80,11 @@
         @endif
         {{-- <p class="article-content"> <a href=""></a> </strong></p> --}}
         @if ($item->image != 'Null')
-          <div>
-            <img src="/storage/{{ $item->image }}" class="img-fluid" alt="Responsive image">
-          </div>
+        @foreach (explode('|', $item->image) as $image)
+        <div class="m-1">
+            <img src="{{ URL::to('/storage/media/posts/'.$image)}}" class="img-fluid">
+        </div>
+        @endforeach
         @endif
         </div>
     </article>

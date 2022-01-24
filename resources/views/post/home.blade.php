@@ -8,11 +8,11 @@
   <article class="media content-section">
       <div class="media-body">
         <div class="article-metadata">
+        <img class="rounded-circle article-img" src={{$item->user->profile->profileImage()}}>
           <a class="mr-2" href="{{ route('profile.show',$item->user->id) }}"> {{$item->user->name}} </a>
           <div>
             <small class="text-muted"> {{$item->updated_at->diffforhumans()}} </small> | </small><span class="badge badge-info text-center">{{$item->emotion}}</span>
           </div>
-
         </div>
         @if ($item->image == 'Null')
           <div class="card bg-dark text-white">
