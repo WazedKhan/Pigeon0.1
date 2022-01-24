@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('page_name')
-    <h1>New User List</h1>
+    <h1>User List</h1>
 @endsection
 @section('content')
   @if(session()->has('notice'))
