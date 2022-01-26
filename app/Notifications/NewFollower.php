@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class NewFollower extends Notification
 {
@@ -50,7 +51,8 @@ class NewFollower extends Notification
     {
         return
         [
-            'follower_id'=>1,
+            'follower_details'=>Auth::user(),
+            'message'=>' is following you'
         ];
     }
 
