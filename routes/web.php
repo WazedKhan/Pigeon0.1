@@ -14,12 +14,11 @@ use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\AnonymousController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController as Users;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', [HomeController::class,'post'])->name('home');
 
-Route::get('/notification/', function () {
-    return view('auth.notification')->name('notifications');
-});
+Route::get('/notification', [NotificationController::class,'index'])->name('notifications');
 
 Route::prefix('post/')->group(function () {
     Route::get('/', [PostController::class,'index'])->name('post.home');
