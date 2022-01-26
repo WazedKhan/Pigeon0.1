@@ -1,28 +1,30 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExtraFeature;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\AnonymousController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FollowController;
-use App\Http\Controllers\ExtraFeature;
-use App\Http\Controllers\ChatController;
-// Admin Controller 
-use App\Http\Controllers\Admin\UserController as Users;
+use App\Http\Controllers\ProfilesController;
+// Admin Controller
+use App\Http\Controllers\AnonymousController;
 use App\Http\Controllers\Admin\ReportController;
-
+use App\Http\Controllers\Admin\UserController as Users;
 
 Route::get('/', [HomeController::class,'post'])->name('home');
 
-
+Route::get('/notification/', function () {
+    return view('auth.notification')->name('notifications');
+});
 
 Route::prefix('post/')->group(function () {
     Route::get('/', [PostController::class,'index'])->name('post.home');
     Route::get('/create/', [PostController::class,'create'])->name('post.create');
-    Route::post('/store/', [PostController::class,'store'])->name('post'); 
+    Route::post('/store/', [PostController::class,'store'])->name('post');
     Route::get('/{post_id}/', [PostController::class, 'detailView'])->name('post.detail');
     Route::get('/view/{post_id}', [PostController::class, 'updateView'])->name('post.updateView');
     Route::patch('/view/{post_id}/update', [PostController::class, 'update'])->name('post.update');
@@ -56,11 +58,11 @@ Route::prefix('/anonymous')->group(function () {
     Route::post('/store', [AnonymousController::class, 'store'])->name('anonymous.store');
 });
 
-// Searching Routes 
+// Searching Routes
 
 Route::get('/search/',[ExtraFeature::class, 'search'])->name('search');
 
-// Following Routes 
+// Following Routes
 Route::get('/follow/{user_id}', [FollowController::class, 'addFollow'])->name('follow');
 Route::get('/unfollow/{user_id}', [FollowController::class, 'unFollow'])->name('unfollow');
 Route::get('friends/suggestions',[ExtraFeature::class, 'suggest'])->name('suggest');
