@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\NewMessage;
 use Illuminate\Http\Request;
 use App\Models\Follow;
 use App\Models\Message;
@@ -44,6 +45,7 @@ class ChatController extends Controller
             'receiver_id'=>$reciver_id,
             'message'=>request()->message
         ]);
+        User::find($reciver_id)->notify( new NewMessage());
         return redirect()->back();
 
     }
