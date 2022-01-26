@@ -30,7 +30,7 @@ class NewFollower extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['database'];
     }
 
     /**
@@ -51,8 +51,8 @@ class NewFollower extends Notification
     {
         return
         [
-            'follower_details'=>Auth::user(),
-            'message'=>' is following you'
+            'info'=>Auth::user(),
+            'message'=>' is now following you'
         ];
     }
 
