@@ -29,9 +29,10 @@
           </a>
 
           <a class="nav-item nav-link" href="{{ route('notifications') }}">
-            <i class="far fa-bell">
-            <span class="badge badge-light text-center pt-1">{{ Auth::user()->notifications()->count() }}</span>
-            </i>
+            <i class="far fa-bell"></i>
+            @if (Auth::user()->unreadnotifications()->count()>0)
+            <span class="badge badge-danger text-center pt-1">{{ Auth::user()->unreadnotifications()->count() }}</span>
+            @endif
           </a>
 
           <a class="nav-item nav-link" href=" {{ route('post.create') }} ">Create New Post</a>
