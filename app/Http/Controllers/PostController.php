@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Post;
 use App\Models\Like;
+use App\Models\Post;
+use App\Models\User;
 use App\Models\Report;
 use App\Models\Commnet;
+use App\Notifications\CommentNotification;
+use App\Notifications\LikeNotification;
+use Illuminate\Http\Request;
+use App\Notifications\NewFollower;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Validated;
 
 class   PostController extends Controller
@@ -119,6 +122,9 @@ class   PostController extends Controller
         else
         {
             $likes->liked()->attach(Auth::user()->id);
+            if (Auth::user()->id!=$likes->user_id) {
+                User::find($likes->user_id)->notify(new LikeNotification());
+            }
             return redirect()->back();
         }
     }
@@ -133,13 +139,17 @@ class   PostController extends Controller
     // Post Comment Create Method
     public function makeComment($post_id)
     {
+        $userId = Post::find($post_id);
         Commnet::create([
             'user_id'=>Auth::user()->id,
             'post_id'=>$post_id,
             'comment'=>request()->comment
         ]);
+        if (Auth::user()->id!=$userId->user_id) {
+            User::find($userId->user_id)->notify(new CommentNotification());
+        }
         return redirect()->route('post.detail',$post_id)
-            ->with('success','Post updated successfully');
+            ->with('success','Commented ');
     }
 
     // Post Liked People list shows Method
