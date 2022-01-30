@@ -15,7 +15,9 @@ class AdminController extends Controller
     
     public function index()
     {
-        return view('admin.user.dashboard');
+        $data = User::all()->unique('name');
+        dd($data);
+        return view('admin.user.dashboard',compact('data'));
     }
 
     public function posts()
