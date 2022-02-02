@@ -18,7 +18,8 @@ class UsersTableSeeder extends Seeder
             [
                 'username'=>'tintin',
                 'name'=>'Tintin',
-                'email'=>'test@gmail.com',
+                'role'=>'admin',
+                'email'=>'wazedkhan119399@gmail.com',
                 'password'=>bcrypt('123456'),
             ],
 
