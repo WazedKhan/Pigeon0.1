@@ -9,12 +9,13 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FollowController;
-use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\PasswordController;
 // Admin Controller
+use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\AnonymousController;
 use App\Http\Controllers\Admin\ReportController;
-use App\Http\Controllers\Admin\UserController as Users;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Admin\UserController as Users;
 
 Route::get('/', [HomeController::class,'post'])->name('home');
 
@@ -79,3 +80,10 @@ Route::prefix('/admin/')->group(function () {
     Route::get('/user', [Users::class, 'index'])->name('admin.user.index');
     Route::patch('/user/status/{id}', [Users::class, 'status'])->name('admin.user.changeStatus');
 });
+
+Route::get('/reset/Password', function () {
+    return view('auth.forgot_password');
+});
+Route::post('/password/mail', [PasswordController::class, 'send'])->name('send.mail');
+Route::get('/password/reset/{token}/{email}', [PasswordController::class, 'resetView'])->name('pass.reset');
+Route::post('/password/reset/', [PasswordController::class, 'resetPassword'])->name('reset.password');

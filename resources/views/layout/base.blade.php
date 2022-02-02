@@ -40,7 +40,6 @@
         <div class="col-md-4">
           {{-- Sidebar starts --}}
             @yield('sidebar')
-            @yield('content2')
           {{-- Sidebar ends --}}
         </div>
       </div>

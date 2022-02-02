@@ -6,13 +6,13 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Report;
 use App\Models\Commnet;
-use App\Notifications\CommentNotification;
-use App\Notifications\LikeNotification;
 use Illuminate\Http\Request;
 use App\Notifications\NewFollower;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Validated;
+use App\Notifications\LikeNotification;
+use App\Notifications\CommentNotification;
 
 class   PostController extends Controller
 {
