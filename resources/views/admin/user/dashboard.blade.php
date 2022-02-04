@@ -1,17 +1,14 @@
 @extends('admin.master')
 @section('content')
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{{ url('/media/extra/users.png') }}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Users</h5>
+        <p class="card-text">In previous 
+        <form action="{{ route('admin.home') }}" method="get">
+          @csrf
+          <input type="number" name="search" value="{{ $search }}">
+        </form>  
+          <h6 class="card-title text-center">days new users are: <strong class="text-primary">{{ $data->count() }}</strong> </h6></p>
   </div>
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{{ url('/media/extra/users.png') }}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-  </div>
+</div>
 @endsection
