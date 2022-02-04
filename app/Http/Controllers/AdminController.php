@@ -25,7 +25,7 @@ class AdminController extends Controller
         }
         $data = User::where('created_at','>=', Carbon::now()->subDays($search))
         ->get();
-        return view('admin.user.dashboard',compact('data',search));
+        return view('admin.user.dashboard',compact('data','search'));
     }
 
     public function posts()
