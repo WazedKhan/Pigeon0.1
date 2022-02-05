@@ -38,7 +38,9 @@
     @endif
     <div class="row pl-3">
       <a href="{{route('post.likers',$post->id)}}">{{$post->liked->count()}} 💖</a> |
-      <a href="http://"> 💬{{$comments->count()}} Comments </a>
+      <a href="http://"> 💬{{$comments->count()}} Comments </a>| Share post on
+      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61fde7493d91fa1c"></script>
+      <div class="addthis_inline_share_toolbox"></div>
     </div>
   </div>
 
