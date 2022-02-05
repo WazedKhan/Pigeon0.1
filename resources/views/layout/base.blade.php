@@ -29,7 +29,6 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
-
           {{-- Body content starts --}}
             @yield('content')
           {{-- Body Content ends --}}
@@ -40,6 +39,7 @@
         <div class="col-md-4">
           {{-- Sidebar starts --}}
             @yield('sidebar')
+            @include('layout.sider_nev')
           {{-- Sidebar ends --}}
         </div>
       </div>

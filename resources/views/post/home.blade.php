@@ -35,7 +35,7 @@
         @endforeach
         @endif
         <div class="row pl-3">
-          <a href="{{route('post.likers',$item->id)}}"> {{$item->liked->count()}} 💖</a>  Share post on
+          <a href="{{route('post.likers',$item->id)}}"> {{$item->liked->count()}} 💖</a> | Share post on
           <!-- Go to www.addthis.com/dashboard to customize your tools -->
           
           <div class="addthis_inline_share_toolbox"></div>  
