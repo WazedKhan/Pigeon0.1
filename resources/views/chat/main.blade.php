@@ -26,7 +26,7 @@
                                 <strong class="mb-1">{{ $item->user->name }}</strong>
                                 <small><span class="badge badge-light">{{ $item->created_at->diffforhumans() }}</span></small>
                             </div>
-                            <p class="mb-1">{{ $item->message }}</p>
+                            <p class="mb-1">{{ \Crypt::decryptString($item->message) }}</p>
                             <small><span><span class="badge badge-secondary">seen</span></span></small>
                         </a>
                         @else
@@ -35,7 +35,7 @@
                                 <strong class="mb-1">{{ $item->user->name }}</strong>
                                 <small><span class="badge badge-light">{{ $item->created_at->diffforhumans() }}</span></small>
                             </div>
-                            <p class="mb-1">{{ $item->message }}</p>
+                            <p class="mb-1">{{ \Crypt::decryptString($item->message) }}</p>
                             <small><span><span class="badge badge-secondary">seen</span></span></small>
                         </a>
                         @endif

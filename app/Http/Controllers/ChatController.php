@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use App\Notifications\NewMessage;
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Follow;
 use App\Models\Message;
-use App\Models\User;
+use Illuminate\Http\Request;
+use App\Notifications\NewMessage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class ChatController extends Controller
 {
@@ -32,6 +34,9 @@ class ChatController extends Controller
         ->orwhere('user_id',$id)
         ->where('receiver_id',Auth::user()->id)
         ->get();
+        // dd(Crypt::decryptString($message->message));
+
+
 
 
         return view('chat.main',compact('user', 'chat', 'message'));
@@ -43,7 +48,7 @@ class ChatController extends Controller
         Message::create([
             'user_id'=>Auth::user()->id,
             'receiver_id'=>$reciver_id,
-            'message'=>request()->message
+            'message'=>Crypt::encryptString(request()->message)
         ]);
         User::find($reciver_id)->notify( new NewMessage());
         return redirect()->back();
