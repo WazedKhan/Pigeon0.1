@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Report;
 use App\Models\Commnet;
+use App\Models\PostImage;
 use Illuminate\Http\Request;
 use App\Notifications\NewFollower;
 use Illuminate\Support\Facades\DB;
@@ -35,38 +36,39 @@ class   PostController extends Controller
         return view('post.create_post');
     }
 
+
     // Post Create Method
     public function store()
     {
-        // dd(request()->all());
         $hello =request()->caption;
         $hello = str_replace(' ', '_', $hello);
         $command = escapeshellcmd('python '.getcwd().'/python/main.py '.$hello);
         $output = shell_exec($command);
 
-        $images=array();
-        if($files=request()->file('image'))
-        {
-            foreach($files as $file)
-                {
-                    $name=$file->getClientOriginalName();
-                    $file->move('storage\media\posts',$name);
-                    $images[]=$name;
-                }
-        }
-        else
-        {
-            $images='Null';
-        }
-        Post::create([
+        
+        $post = Post::create([
             'caption' => request('caption'),
             'type' => request('type'),
-            'image' => implode("|",$images),
             'user_id' => Auth::id(),
             'emotion'=>$output
         ]);
+
+        if(request('image'))
+        {
+            foreach (request()->image as $value) 
+                {
+                    $images = $value->store('/media/post','public');
+                    PostImage::create([
+                        'post_id'=>$post->id,
+                        'user_id'=>$post->user_id,
+                        'image'=>$images,
+                    ]);
+                }
+            }
+
         return redirect()->route('post.home')->with('success','Post Created Successfully!');
     }
+
 
     // Post Details View Method
     public function detailView($post_id)
