@@ -31,4 +31,6 @@ class ExtraFeature extends Controller
         $user = User::all();
         return view('layout.sidebar', compact('user'));
     }
+
+    
 }

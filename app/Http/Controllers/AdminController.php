@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Post;
+use App\Models\ReportCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -33,4 +34,19 @@ class AdminController extends Controller
         $posts = Post::all();
         return view('admin.user.postList', compact('posts'));
     }
+
+    // Report
+
+    public function reportCategorylist()
+    {
+        $reCat = ReportCategory::all();
+        return view('admin.user.report',compact('reCat'));
+    }
+
+    public function reportCategorycreate()
+    {
+        ReportCategory::create(request()->except('_token'));
+        return redirect()->back();
+    }
+
 }

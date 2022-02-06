@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
-    <title>Admin Panel</title>
+    <title>Pigeon - Admin Panel</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css"
         crossorigin="anonymous">
         <link rel="stylesheet" href="/css/style.css">
@@ -23,10 +23,10 @@
   </a>
   <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
-      <div class="sidebar-brand">
-        <a href="#">Admin</a>
+      <div class="sidebar-brand h3 text-center">
+        <a href="{{route('home')}}">Pigeon</a>
         <div id="close-sidebar">
-          <i class="fas fa-times"></i>
+          
         </div>
       </div>
       <div class="sidebar-header">
@@ -37,7 +37,7 @@
         </div>
         <div class="user-info">
           <span class="user-name">
-            <strong>{{ Auth::user()->profile->user->username}}</strong>
+            <strong>{{ Auth::user()->profile->user->name}}</strong>
           </span>
           <span class="user-role">Administrator</span>
           <span class="user-status">
@@ -59,7 +59,6 @@
           </div>
         </div>
       </div>
-      <!-- sidebar-search  -->
       <div class="sidebar-menu">
         <ul>
           <li class="header-menu">
@@ -72,16 +71,25 @@
               <span class="badge badge-pill badge-warning">New</span>
             </a>
           </li>
+
           <li class="sidebar-dropdown">
             <a href=" {{route('admin.posts')}} ">
               <i class="fas fa-blog"></i>
               <span>Posts</span>
             </a>
           </li>
+
           <li class="sidebar-dropdown">
             <a href="{{route('admin.user.index')}}">
               <i class="far fa-gem"></i>
               <span>Users</span>
+            </a>
+          </li>
+
+          <li class="sidebar-dropdown">
+            <a href="{{route('admin.report.list')}}">
+              <i class="fas fa-bug"></i>
+              <span>Reports</span>
             </a>
           </li>
           
@@ -129,7 +137,7 @@
 
       <footer class="text-center">
         <div>
-          <small>@2021</small>
+          <small>© Copyright 2022 Pigeon - All Rights reserved</small>
         </div>
       </footer>
     </div>

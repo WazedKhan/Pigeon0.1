@@ -19,7 +19,18 @@ class UsersTableSeeder extends Seeder
                 'username'=>'tintin',
                 'name'=>'Tintin',
                 'role'=>'admin',
-                'email'=>'wazedkhan119399@gmail.com',
+                'email'=>'test@gmail.com',
+                'password'=>bcrypt('123456'),
+            ],
+
+        );
+
+        User::create(
+            [
+                'username'=>'light',
+                'name'=>'Mr.LightYear',
+                'role'=>'user',
+                'email'=>'light@gmail.com',
                 'password'=>bcrypt('123456'),
             ],
 

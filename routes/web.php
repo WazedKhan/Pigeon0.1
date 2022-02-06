@@ -10,10 +10,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PasswordController;
-// Admin Controller
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\AnonymousController;
-use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\UserController as Users;
 
@@ -51,8 +49,8 @@ Route::get('login/', [UserController::class, 'LoginView'])->name('login');
 Route::post('signin/', [UserController::class, 'signIn'])->name('signin');
 Route::get('logout/', [UserController::class, 'logout'])->name('logout');
 
-//Route::get('/register/create', [UserController::class, 'register'])->name('register.create');
 
+// Useless Routes 
 Route::prefix('/anonymous')->group(function () {
     Route::get('/', [AnonymousController::class, 'index'])->name('anonymous.index');
     Route::get('/create', [AnonymousController::class, 'create'])->name('anonymous.create');
@@ -68,20 +66,22 @@ Route::get('/follow/{user_id}', [FollowController::class, 'addFollow'])->name('f
 Route::get('/unfollow/{user_id}', [FollowController::class, 'unFollow'])->name('unfollow');
 Route::get('friends/suggestions',[ExtraFeature::class, 'suggest'])->name('suggest');
 
-// Chat
+// Chat Routes
 Route::get('chat/',[ChatController::class,'index'])->name('chat');
 Route::get('chat/user/{id}',[ChatController::class,'chat'])->name('chat.user');
 Route::post('chat/text/{id}',[ChatController::class,'addText'])->name('chat.text');
 
-// Admin
+// Admin's Routes
 Route::prefix('/admin/')->group(function () {
-    // users functions
     Route::get('/', [AdminController::class, 'index'])->name('admin.home');
     Route::get('/posts', [AdminController::class, 'posts'])->name('admin.posts');
     Route::get('/user', [Users::class, 'index'])->name('admin.user.index');
     Route::patch('/user/status/{id}', [Users::class, 'status'])->name('admin.user.changeStatus');
+    Route::get('/reports', [AdminController::class, 'reportCategorylist'])->name('admin.report.list');
+    Route::post('/reports/create', [AdminController::class, 'reportCategorycreate'])->name('admin.report.create');
 });
 
+// Password Reset Routes
 Route::get('/reset/Password', function () {
     return view('auth.forgot_password');
 });

@@ -73,11 +73,10 @@ class   PostController extends Controller
     // Post Details View Method
     public function detailView($post_id)
     {
-        $report = Report::all();
-        $post = Post::find($post_id);
+        $post = Post::findOrFail($post_id);
         $image = PostImage::where('post_id',$post_id)->get();
         $comments = Commnet::where('post_id',$post_id)->get();
-        return view('post.detail', compact('post','comments', 'image', 'report'));
+        return view('post.detail', compact('post','comments', 'image'));
     }
 
     // Post Update Form
