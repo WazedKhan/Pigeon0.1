@@ -6,7 +6,7 @@
     <div class="col-5">
         <div class="col-1">
             {{-- @dd($user->profile->profileImage()) --}}
-            <img src="{{$user->profile->profileImage()}}" class="rounded-circle" width="250" height="250" object-fit ="cover">
+            <img src="{{$user->profile->profileImage()}}" class="rounded-circle border border-secondary" width="250" height="250" object-fit ="cover">
         </div>
     </div>
     <div class="col-7 pt-5">
