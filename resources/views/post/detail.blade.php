@@ -19,6 +19,9 @@
           @foreach ($image as $images)
             <div class="m-1">
                 <img src="{{ url('storage/'.$images->image) }}" class="img-fluid" alt="Responsive image">
+                @if (Auth::user()->id == $images->user_id)
+                <a class="btn btn-outline-danger m-1" href="{{ route('post.image.delete',$images->id) }}">Delete</a>
+                @endif
             </div>
           @endforeach
 

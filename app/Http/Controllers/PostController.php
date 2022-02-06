@@ -91,10 +91,22 @@ class   PostController extends Controller
     // Post Update Method
     public function update($id)
     {
-        $request = request()->except(['_token','_method']);
-
+        $request = request()->except(['_token','_method','image']);
         $post = Post::find($id);
         $post->update($request);
+        
+        if(request('image'))
+        {
+            foreach (request()->image as $value) 
+            {
+                $images = $value->store('posts','public');
+                PostImage::create([
+                    'post_id'=>$post->id,
+                    'user_id'=>Auth::user()->id,
+                    'image'=>$images,
+                ]);
+            }
+        }
 
         return redirect()->route('post.detail',$post->id)
             ->with('success','Post updated successfully');
@@ -107,6 +119,14 @@ class   PostController extends Controller
         return redirect()->route('post.home')
             ->with('success','Post Deleted successfully');
     }
+
+
+public function deleteImage($image_id)
+{
+    PostImage::findOrFail($image_id)->delete();
+    return redirect()->back();
+}
+
 
     // Post Like Method
     public function like($post_id)
