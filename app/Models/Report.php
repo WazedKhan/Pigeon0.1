@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
-    protected $guarded = [];
     use HasFactory;
-    public function user()
+    protected $guarded = [];
+
+    public function post()
     {
-        return $this->belongsTO(User::class);
+        return $this->belongsTo(Post::class);
+    }
+
+    public function ReportCategroy()
+    {
+        return $this->belongsTo(ReportCategory::class);
     }
 }

@@ -29,4 +29,9 @@ class Post extends Model
     {
         return $this->hasMany(Commnet::class);
     }
+
+    public function report()
+    {
+        return $this->hasMany(Report::class);
+    }
 }

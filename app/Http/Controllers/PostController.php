@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Report;
 use App\Models\Commnet;
 use App\Models\PostImage;
+use App\Models\ReportCategory;
 use Illuminate\Http\Request;
 use App\Notifications\NewFollower;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Validated;
 use App\Notifications\LikeNotification;
 use App\Notifications\CommentNotification;
+use Illuminate\Contracts\Session\Session;
 
 class   PostController extends Controller
 {
@@ -73,10 +75,12 @@ class   PostController extends Controller
     // Post Details View Method
     public function detailView($post_id)
     {
+        $recat = ReportCategory::all();
         $post = Post::findOrFail($post_id);
+        $report = Report::where('post_id',$post_id);
         $image = PostImage::where('post_id',$post_id)->get();
         $comments = Commnet::where('post_id',$post_id)->get();
-        return view('post.detail', compact('post','comments', 'image'));
+        return view('post.detail', compact('post','comments', 'image','recat','report'));
     }
 
     // Post Update Form
@@ -174,5 +178,25 @@ public function deleteImage($image_id)
         $ids = Like::where('post_id', $post_id)->get('user_id');
         $like_list = User::find($ids);
         return view('post.likes', compact('like_list'));
+    }
+
+    // Report Method
+    public function makeReport($post_id)
+    {
+        
+
+        $user_id = Auth::user()->id;
+        $post = Post::findOrFail($post_id);
+        $report = Report::where('reporter_id',$user_id)->where('post_id',$post_id)->exists();
+        if($post->user_id != $user_id && $report == false)
+        {
+            Report::create([
+                'report_category_id'=>request()->report_id,
+                'post_id'=>$post_id,
+                'reporter_id'=>$user_id
+            ]);
+            return redirect()->back();
+        }
+        return redirect()->back();
     }
 }

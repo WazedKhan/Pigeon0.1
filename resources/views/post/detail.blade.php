@@ -43,7 +43,7 @@
     @endif
     <div class="row pl-3">
       <a href="{{route('post.likers',$post->id)}}">{{$post->liked->count()}} 💖</a> |
-      <a href="#"> 💬{{$comments->count()}} Comments </a>| Share post on
+       💬 {{$comments->count()}} Comments | {{ $report->count() }} Reports  | Share
       <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61fde7493d91fa1c"></script>
       <div class="addthis_inline_share_toolbox"></div>
     </div>
@@ -56,6 +56,10 @@
 
     <a class="btn btn-outline-secondary float-right align-self-center" href="{{ route('post.comment', $post->id) }}" role="button">
       <i class="far fa-comment-alt"> Comment </i>
+    </a>
+
+    <a class="btn btn-outline-secondary float-right align-self-center" href="#" role="button" data-toggle="modal" data-target="#exampleModalCenter">
+      <i class="far fa-flag"> Report </i>
     </a>
   </div>
   @foreach ($comments as $comment)
@@ -72,7 +76,6 @@
   </ul>
 </div>
 
-@endsection
 
 
 {{-- Modal --}}
@@ -80,28 +83,41 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <h5 class="modal-title text-center" id="exampleModalCenterTitle">Submit Your Report</h5>
+        <div>
+          <p>You can make report only once on this post and can't remove once submitted</p>
+        </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+
+        <form action="{{ route('post.report',$post->id) }}" method="post">
           @csrf
-          @foreach ($report as $item)
+          @foreach ($recat as $item)
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="report" value="1" value=" {{$item->id}} " checked>
-            <label class="form-check-label" for="flexRadioDefault2">
-              {{$item->report}}
-            </label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="report_id" id="exampleRadios2" value="{{ $item->id }}">
+              <label class="form-check-label" for="exampleRadios2">
+                {{ $item->name }}
+              </label>
+            </div>
           </div>
           @endforeach
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Report</button>
-          </div>
+          <button type="submit" class="form-control btn btn-primary">Submit</button>
         </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
       </div>
     </div>
   </div>
 </div>
+
+
+@endsection
+
+
