@@ -26,17 +26,10 @@
                              name="caption"
                              value="{{ old('caption') ?? $post->caption}}"
                              autocomplete="caption" autofocus>
-      </div>
-    
-      <div class="form-group">
-        <label for="image" class="col-md-4 col-form-label">Image</label>
-
-        <input type="file" class="form-control-file" id="image" name="image">
-
-        @if ($errors->has('image'))
-            <strong>{{ $errors->first('image') }}</strong>
-        @endif
-
-        <button type="submit" class="btn btn-primary pt-1 mt-3">Submit</button>
     </div>
+    
+    <div class="form-group">
+    <button type="submit" class="btn btn-primary pt-1 mt-3">Submit</button>
+    </div>
+</form>
 @endsection

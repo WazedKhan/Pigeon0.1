@@ -2,7 +2,7 @@
 @section('content')
 <article class="media content-section">
   <div class="media-body">
-    @if ($post->image == 'Null')
+    @if ($image == '[]')
           <div class="card bg-dark text-white">
             <img src="/media/blur.jpg" class="card-img " width="20px" alt="...">
             <div class="card-img-overlay">
@@ -15,11 +15,13 @@
         <p><a class="article-title" href=" {{ route('post.detail',$post->id) }} ">{{$post->caption}}</a></p>
         @endif
         @if ($post->image != 'Null')
-        @foreach (explode('|', $post->image) as $image)
-        <div class="m-1">
-            <img src="{{ URL::to('/storage/media/posts/'.$image)}}" class="img-fluid" alt="Responsive image">
-        </div>
-        @endforeach
+
+          @foreach ($image as $images)
+            <div class="m-1">
+                <img src="{{ url('storage/'.$images->image) }}" class="img-fluid" alt="Responsive image">
+            </div>
+          @endforeach
+
         @endif
   </div>
 </article>
@@ -31,14 +33,14 @@
   <div class="article-metadata">
     <img src=" {{$post->user->profile->profileImage()}} " class="rounded-circle" width="60" height="60" alt="Profile Image">
     <a class="mr-2 " href="{{ route('profile.show',$post->user->profile->id) }}"> <h3>{{$post->user->name}}</h3> </a>
-    <small class="text-muted float-right "> {{$post->updated_at->diffforhumans()}} </small> <span class="badge badge-primary"> Feeling {{$post->emotion}}</span>
+    <small class="text-muted float-right "> {{$post->updated_at->diffforhumans()}} </small> <span class="badge badge-primary"> Feeling {{$post->emotion}} </span>
     @if (Auth::user()->id == $post->user->id)
       <a href=" {{ route('post.updateView', $post->id) }} " class="badge badge-dark">Edit</a>
       <a href=" {{ route('post.delete', $post->id) }} " class="badge badge-danger">Delete</a>
     @endif
     <div class="row pl-3">
       <a href="{{route('post.likers',$post->id)}}">{{$post->liked->count()}} 💖</a> |
-      <a href="http://"> 💬{{$comments->count()}} Comments </a>| Share post on
+      <a href="#"> 💬{{$comments->count()}} Comments </a>| Share post on
       <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61fde7493d91fa1c"></script>
       <div class="addthis_inline_share_toolbox"></div>
     </div>

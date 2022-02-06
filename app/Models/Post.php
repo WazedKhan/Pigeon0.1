@@ -19,4 +19,14 @@ class Post extends Model
     {
         return $this->belongsToMany(User::class)->withTimestamps();
     }
+
+    public function post_image()
+    {
+        return $this->hasMany(PostImage::class);
+    }
+
+    public function commnet()
+    {
+        return $this->hasMany(Commnet::class);
+    }
 }

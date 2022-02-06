@@ -37,7 +37,7 @@
                            class="form-control{{ $errors->has('caption') ? ' is-invalid' : '' }}"
                            name="caption"
                            value="{{ old('caption') }}"
-                           autocomplete="caption" autofocus>
+                           autocomplete="caption" required autofocus>
 
                     @if ($errors->has('caption'))
                         <span class="invalid-feedback" role="alert">
@@ -49,7 +49,7 @@
                 <div class="row">
                     <label for="image" class="col-md-4 col-form-label">Post Image</label>
 
-                    <input required type="file" class="form-control" name="image[]" placeholder="address" multiple>
+                    <input type="file" class="form-control" name="image[]" placeholder="address" multiple>
 
                     @if ($errors->has('image'))
                         <strong>{{ $errors->first('image') }}</strong>

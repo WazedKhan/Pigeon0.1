@@ -26,13 +26,13 @@
         @else
         <p><a class="article-title" href=" {{ route('post.detail',$item->id) }} ">{{$item->caption}}</a></p>
         @endif
-        {{-- <p class="article-content"> <a href=""></a> </strong></p> --}}
-        @if ($item->image != 'Null')
-            @foreach (explode('|', $item->image) as $image)
-                <div class="m-1">
-                    <img src="{{ URL::to('/storage/media/posts/'.$image)}}" class="img-fluid" alt="Responsive image">
-                </div>
-            @endforeach
+
+        @if ($item->post_image != '[]')
+        @foreach ($item->post_image as $image)
+        <div class="m-1">
+            <img src="{{ URL::to('/storage/'.$image->image)}}" class="img-fluid" alt="Responsive image">
+        </div>
+        @endforeach
         @endif
 
 

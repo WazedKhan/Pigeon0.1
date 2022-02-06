@@ -27,7 +27,8 @@ class   PostController extends Controller
     public function index()
     {
         $post = Post::latest()->get();
-        return view('post.home',compact('post'));
+        $image = PostImage::all();
+        return view('post.home',compact('post','image'));
     }
 
     // Post Create form
@@ -44,7 +45,6 @@ class   PostController extends Controller
         $hello = str_replace(' ', '_', $hello);
         $command = escapeshellcmd('python '.getcwd().'/python/main.py '.$hello);
         $output = shell_exec($command);
-
         
         $post = Post::create([
             'caption' => request('caption'),
@@ -57,7 +57,7 @@ class   PostController extends Controller
         {
             foreach (request()->image as $value) 
                 {
-                    $images = $value->store('/media/post','public');
+                    $images = $value->store('posts','public');
                     PostImage::create([
                         'post_id'=>$post->id,
                         'user_id'=>$post->user_id,
@@ -73,17 +73,19 @@ class   PostController extends Controller
     // Post Details View Method
     public function detailView($post_id)
     {
-        $post = Post::find($post_id);
         $report = Report::all();
+        $post = Post::find($post_id);
+        $image = PostImage::where('post_id',$post_id)->get();
         $comments = Commnet::where('post_id',$post_id)->get();
-        return view('post.detail', compact('post','comments','report'));
+        return view('post.detail', compact('post','comments', 'image', 'report'));
     }
 
     // Post Update Form
     public function updateView($id)
     {
         $post = Post::find($id);
-        return view('post.update', compact('post'));
+        $image = PostImage::where('post_id',$id)->get();
+        return view('post.update', compact('post','image'));
     }
 
     // Post Update Method
@@ -92,14 +94,7 @@ class   PostController extends Controller
         $request = request()->except(['_token','_method']);
 
         $post = Post::find($id);
-        if(request('image')){
-            $image_path  = request('image')->store('/media/posts','public');
-            $imageArray = ['image'=>$image_path];
-        }
-        $post->update(array_merge(
-            $request,
-            $imageArray ?? [],
-        ));
+        $post->update($request);
 
         return redirect()->route('post.detail',$post->id)
             ->with('success','Post updated successfully');

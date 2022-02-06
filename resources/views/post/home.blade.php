@@ -14,7 +14,7 @@
             <small class="text-muted"> {{$item->updated_at->diffforhumans()}} </small> | </small><span class="badge badge-info text-center">{{$item->emotion}}</span>
           </div>
         </div>
-        @if ($item->image == 'Null')
+        @if ($item->post_image == '[]')
           <div class="card bg-dark text-white">
             <img src="/media/blur.jpg" class="card-img " width="20px" alt="...">
             <div class="card-img-overlay">
@@ -26,19 +26,15 @@
         @else
         <p><a class="article-title" href=" {{ route('post.detail',$item->id) }} ">{{$item->caption}}</a></p>
         @endif
-        {{-- <p class="article-content"> <a href=""></a> </strong></p> --}}
-        @if ($item->image != 'Null')
-        @foreach (explode('|', $item->image) as $image)
-        <div class="m-1">
-            <img src="{{ URL::to('/storage/media/posts/'.$image)}}" class="img-fluid" alt="Responsive image">
-        </div>
+        @if ($item->post_image != '[]')
+        @foreach ($item->post_image as $image)
+        <div id="myDiv">
+            <img src="{{ URL::to('/storage/'.$image->image) }}" class="img-fluid" alt="Responsive image">
+        </div> 
         @endforeach
         @endif
         <div class="row pl-3">
-          <a href="{{route('post.likers',$item->id)}}"> {{$item->liked->count()}} 💖</a> | Share post on
-          <!-- Go to www.addthis.com/dashboard to customize your tools -->
-          
-          <div class="addthis_inline_share_toolbox"></div>  
+          <a href="{{route('post.likers',$item->id)}}"> {{$item->liked->count()}} 💖</a>| 💬 {{$item->commnet->count()}}
         </div>
         <hr>
 
