@@ -32,5 +32,11 @@ class ExtraFeature extends Controller
         return view('layout.sidebar', compact('user'));
     }
 
+    // Groups Methods Starts Here
+    
+    public function groupCreateView()
+    {
+        return view('groups.create');
+    }
     
 }

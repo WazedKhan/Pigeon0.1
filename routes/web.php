@@ -89,3 +89,7 @@ Route::get('/reset/Password', function () {
 Route::post('/password/mail', [PasswordController::class, 'send'])->name('send.mail');
 Route::get('/password/reset/{token}/{email}', [PasswordController::class, 'resetView'])->name('pass.reset');
 Route::post('/password/reset/', [PasswordController::class, 'resetPassword'])->name('reset.password');
+
+Route::prefix('/group/')->group(function(){
+    Route::get('create/', [ExtraFeature::class, 'groupCreateView'])->name('create.group');
+});
