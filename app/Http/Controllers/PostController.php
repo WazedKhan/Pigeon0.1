@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
@@ -8,14 +9,9 @@ use App\Models\Report;
 use App\Models\Commnet;
 use App\Models\PostImage;
 use App\Models\ReportCategory;
-use Illuminate\Http\Request;
-use App\Notifications\NewFollower;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Events\Validated;
 use App\Notifications\LikeNotification;
 use App\Notifications\CommentNotification;
-use Illuminate\Contracts\Session\Session;
 
 class   PostController extends Controller
 {
@@ -30,7 +26,7 @@ class   PostController extends Controller
     {
         $post = Post::latest()->get();
         $image = PostImage::all();
-        return view('post.home',compact('post','image'));
+        return view('post.home', compact('post', 'image'));
     }
 
     // Post Create form
@@ -43,32 +39,30 @@ class   PostController extends Controller
     // Post Create Method
     public function store()
     {
-        $hello =request()->caption;
+        $hello = request()->caption;
         $hello = str_replace(' ', '_', $hello);
-        $command = escapeshellcmd('python '.getcwd().'/python/main.py '.$hello);
+        $command = escapeshellcmd('python ' . getcwd() . '/python/main.py ' . $hello);
         $output = shell_exec($command);
-        
+
         $post = Post::create([
             'caption' => request('caption'),
             'type' => request('type'),
             'user_id' => Auth::id(),
-            'emotion'=>$output
+            'emotion' => $output
         ]);
 
-        if(request('image'))
-        {
-            foreach (request()->image as $value) 
-                {
-                    $images = $value->store('posts','public');
-                    PostImage::create([
-                        'post_id'=>$post->id,
-                        'user_id'=>$post->user_id,
-                        'image'=>$images,
-                    ]);
-                }
+        if (request('image')) {
+            foreach (request()->image as $value) {
+                $images = $value->store('posts', 'public');
+                PostImage::create([
+                    'post_id' => $post->id,
+                    'user_id' => $post->user_id,
+                    'image' => $images,
+                ]);
             }
+        }
 
-        return redirect()->route('post.home')->with('success','Post Created Successfully!');
+        return redirect()->route('post.home')->with('post_created', 'Post Created Successfully!');
     }
 
 
@@ -77,42 +71,40 @@ class   PostController extends Controller
     {
         $recat = ReportCategory::all();
         $post = Post::findOrFail($post_id);
-        $report = Report::where('post_id',$post_id);
-        $image = PostImage::where('post_id',$post_id)->get();
-        $comments = Commnet::where('post_id',$post_id)->get();
-        return view('post.detail', compact('post','comments', 'image','recat','report'));
+        $report = Report::where('post_id', $post_id);
+        $image = PostImage::where('post_id', $post_id)->get();
+        $comments = Commnet::where('post_id', $post_id)->get();
+        return view('post.detail', compact('post', 'comments', 'image', 'recat', 'report'));
     }
 
     // Post Update Form
     public function updateView($id)
     {
         $post = Post::find($id);
-        $image = PostImage::where('post_id',$id)->get();
-        return view('post.update', compact('post','image'));
+        $image = PostImage::where('post_id', $id)->get();
+        return view('post.update', compact('post', 'image'));
     }
 
     // Post Update Method
     public function update($id)
     {
-        $request = request()->except(['_token','_method','image']);
+        $request = request()->except(['_token', '_method', 'image']);
         $post = Post::find($id);
         $post->update($request);
-        
-        if(request('image'))
-        {
-            foreach (request()->image as $value) 
-            {
-                $images = $value->store('posts','public');
+
+        if (request('image')) {
+            foreach (request()->image as $value) {
+                $images = $value->store('posts', 'public');
                 PostImage::create([
-                    'post_id'=>$post->id,
-                    'user_id'=>Auth::user()->id,
-                    'image'=>$images,
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'image' => $images,
                 ]);
             }
         }
 
-        return redirect()->route('post.detail',$post->id)
-            ->with('success','Post updated successfully');
+        return redirect()->route('post.detail', $post->id)
+            ->with('post_updated', 'Post updated successfully');
     }
 
     // Post Delete Method
@@ -120,29 +112,27 @@ class   PostController extends Controller
     {
         Post::find($id)->delete();
         return redirect()->route('post.home')
-            ->with('success','Post Deleted successfully');
+            ->with('post_deleted', 'Post Deleted successfully');
     }
 
 
-public function deleteImage($image_id)
-{
-    PostImage::findOrFail($image_id)->delete();
-    return redirect()->back();
-}
+    public function deleteImage($image_id)
+    {
+        PostImage::findOrFail($image_id)->delete();
+        return redirect()->back();
+    }
 
 
     // Post Like Method
     public function like($post_id)
     {
         $likes = Post::find($post_id);
-        if ($likes->liked()->where('user_id',Auth::user()->id)->exists()) {
+        if ($likes->liked()->where('user_id', Auth::user()->id)->exists()) {
             $likes->liked()->detach(Auth::user()->id);
             return redirect()->back();
-        }
-        else
-        {
+        } else {
             $likes->liked()->attach(Auth::user()->id);
-            if (Auth::user()->id!=$likes->user_id) {
+            if (Auth::user()->id != $likes->user_id) {
                 User::find($likes->user_id)->notify(new LikeNotification());
             }
             return redirect()->back();
@@ -161,15 +151,14 @@ public function deleteImage($image_id)
     {
         $userId = Post::find($post_id);
         Commnet::create([
-            'user_id'=>Auth::user()->id,
-            'post_id'=>$post_id,
-            'comment'=>request()->comment
+            'user_id' => Auth::user()->id,
+            'post_id' => $post_id,
+            'comment' => request()->comment
         ]);
-        if (Auth::user()->id!=$userId->user_id) {
+        if (Auth::user()->id != $userId->user_id) {
             User::find($userId->user_id)->notify(new CommentNotification());
         }
-        return redirect()->route('post.detail',$post_id)
-            ->with('success','Commented ');
+        return redirect()->route('post.detail', $post_id)->with('comment','Commented Successfully!');
     }
 
     // Post Liked People list shows Method
@@ -183,19 +172,18 @@ public function deleteImage($image_id)
     // Report Method
     public function makeReport($post_id)
     {
-        
+
 
         $user_id = Auth::user()->id;
         $post = Post::findOrFail($post_id);
-        $report = Report::where('reporter_id',$user_id)->where('post_id',$post_id)->exists();
-        if($post->user_id != $user_id && $report == false)
-        {
+        $report = Report::where('reporter_id', $user_id)->where('post_id', $post_id)->exists();
+        if ($post->user_id != $user_id && $report == false) {
             Report::create([
-                'report_category_id'=>request()->report_id,
-                'post_id'=>$post_id,
-                'reporter_id'=>$user_id
+                'report_category_id' => request()->report_id,
+                'post_id' => $post_id,
+                'reporter_id' => $user_id
             ]);
-            return redirect()->back();
+            return redirect()->back()->with('report', 'Your Report Submited Successfully');
         }
         return redirect()->back();
     }
