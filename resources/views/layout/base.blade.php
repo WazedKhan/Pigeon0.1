@@ -93,6 +93,23 @@
       @endif
     </script>
 
+    {{-- Toast For Report Starts--}}
+    <script type="text/javascript">
+      @if (Session::has('report'))
+          toastr.options.positionClass = 'toast-bottom-right';
+          toastr.info("{{ Session::get('report') }}");
+
+      @elseif (Session::has('own_post'))
+          toastr.options.positionClass = 'toast-bottom-right';
+          toastr.error("{{ Session::get('own_post') }}");
+
+      @elseif (Session::has('alreay_reported'))
+          toastr.options.positionClass = 'toast-bottom-right';
+          toastr.error("{{ Session::get('alreay_reported') }}");
+      @endif
+    </script>
+    {{-- Toast For Report Ends --}}
+
 {{-- Toastr Notifications Ends --}}
 </body>
 </html>

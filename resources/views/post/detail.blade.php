@@ -62,18 +62,24 @@
       <i class="far fa-flag"> Report </i>
     </a>
   </div>
+  <ul class="list-group mt-2">
+    <form action=" {{route('post.comment.make', $post->id)}} " method="POST">
+      @csrf
+      <div class="form-group">
+        <input type="text" name="comment" class="form-control" placeholder="Write a public comment…">
+      </div>
+    </form>
+  </ul>
+  <small><span>comments..</span></small>
   @foreach ($comments as $comment)
       <ul class="list-group m-1">
         <li class="list-group-item ">
           <a href="{{ route('profile.show',$post->user->profile->id) }}">
             <small><strong>{{$comment->user->name}}:</strong></small>
-          </a> {{$comment->comment}}
+          </a> {{$comment->comment}} <small class="text-muted float-right "> {{$comment->updated_at->diffforhumans()}} </small>
         </li>
       </ul>
   @endforeach
-  <ul class="list-group m-1">
-    <li class="list-group-item "> <a href="{{ route('post.comment', $post->id) }}">Reply</a></li>
-  </ul>
 </div>
 
 

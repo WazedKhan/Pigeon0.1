@@ -172,8 +172,6 @@ class   PostController extends Controller
     // Report Method
     public function makeReport($post_id)
     {
-
-
         $user_id = Auth::user()->id;
         $post = Post::findOrFail($post_id);
         $report = Report::where('reporter_id', $user_id)->where('post_id', $post_id)->exists();
@@ -183,8 +181,15 @@ class   PostController extends Controller
                 'post_id' => $post_id,
                 'reporter_id' => $user_id
             ]);
-            return redirect()->back()->with('report', 'Your Report Submited Successfully');
+            return redirect()->back()->with('report', 'Report Submited Successfully');
         }
-        return redirect()->back();
+        elseif($post->user_id == $user_id)
+        {
+            return redirect()->back()->with('own_post', "You Can't Report On Your Own Post");
+        }
+        else
+        {
+            return redirect()->back()->with('alreay_reported', "You Already Reported On This Post");
+        }
     }
 }
