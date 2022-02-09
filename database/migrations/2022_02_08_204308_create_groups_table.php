@@ -19,6 +19,7 @@ class CreateGroupsTable extends Migration
             $table->string('name');
             $table->string('privacy')->default('public');
             $table->string('about')->nullable();
+            $table->string('image');
             $table->timestamps();
         });
     }

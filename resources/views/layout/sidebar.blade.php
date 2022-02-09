@@ -3,7 +3,7 @@
     <p class='text-muted'>
       <ul class="list-group">
         <div class="list-group">
-          <a href="{{ route('create.group') }}" class="list-group-item list-group-item-action active text-center m-1"><i class="fas fa-users"> Goups</i></a>
+          <a href="{{ route('groups') }}" class="list-group-item list-group-item-action active text-center m-1"><i class="fas fa-users"> Goups</i></a>
         </div>
           @foreach ($user_info as $item)
           <li class="list-group-item list-group-item-light m-1">{{ $item->name }}</li>

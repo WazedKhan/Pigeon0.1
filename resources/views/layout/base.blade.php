@@ -11,7 +11,7 @@
     @toastr_css
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-
+    <link rel="stylesheet" type="text/css" href="/css/style2.css">
     <title>Pigeon</title>
 </head>
 
@@ -109,6 +109,18 @@
       @endif
     </script>
     {{-- Toast For Report Ends --}}
+
+    {{--  --}}
+
+    <script type="text/javascript">
+      @if (Session::has('group_created'))
+
+          toastr.options.positionClass = 'toast-bottom-right';
+          toastr.success("{{ Session::get('group_created') }}");
+      @endif
+    </script>
+
+    {{--  --}}
 
 {{-- Toastr Notifications Ends --}}
 </body>

@@ -1,6 +1,16 @@
 @extends('layout.base')
 @section('content')
-    <form action="" method="post">
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+    <form action="{{ route('store.group') }}" method="post" enctype="multipart/form-data">
+      @csrf
         <div class="form-group">
             <label >Group Name</label>
             <input type="name" name="name" class="form-control" placeholder="Group name">
