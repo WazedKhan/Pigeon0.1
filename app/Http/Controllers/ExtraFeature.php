@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\GroupMember;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -66,6 +67,27 @@ class ExtraFeature extends Controller
         ]);
 
         return redirect()->route('groups')->with('group_created',$group->name.' created successfully');
+    }
+
+    public function joinGroup($group_id)
+    {
+        $group = Group::FindOrFail($group_id);
+
+        if ($group->privacy == 'public') {
+            GroupMember::create([
+                'group_id'=> $group_id,
+                'user_id'=> Auth::user()->id,
+                'status'=>true
+            ]);
+            return redirect()->back();
+        }
+        else{
+            GroupMember::create([
+                'group_id'=> $group_id,
+                'user_id'=> Auth::user()->id,
+            ]);
+            return redirect()->back();
+        }
     }
     
 }
