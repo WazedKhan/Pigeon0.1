@@ -8,15 +8,15 @@
         @php $count+=1 @endphp
 
           <div class="card m-1" style="width: 18rem;">
-            <img class="card-img-top" src="{{ url('/storage/'.$item->image) }}" alt="Card image cap">
+            <img class="card-img-top" src="{{ url('/storage/'.$item->image) }}" alt="Card image cap" height="150">
             <div class="card-header">
-              {{ $item->name }}
+              <strong>{{ $item->name }}</strong> 
+              <p>
+                {{ $item->group_member->count() }} members <i class="fa-thin fa-period"></i>
+              </p>
             </div>
             <div class="card-body">
-              <p class="card-text text-justify">{{ $item->about }}</p>
-            </div>
-            <div class="card-footer">
-              <a class="form-control btn btn-warning" href="http://">Join</a>
+              <a class="form-control btn btn-warning" href="{{ route('groups.join',$item->id) }}">Join</a>
             </div>
           </div>
         
