@@ -94,6 +94,9 @@ Route::post('/password/reset/', [PasswordController::class, 'resetPassword'])->n
 Route::prefix('/group/')->group(function(){
     Route::get('/{id}/join', [ExtraFeature::class, 'joinGroup'])->name('groups.join');
     Route::get('/', [ExtraFeature::class, 'showGroups'])->name('groups');
-    Route::get('create/', [ExtraFeature::class, 'groupCreateView'])->name('create.group');
-    Route::post('create/store', [ExtraFeature::class, 'createGroup'])->name('store.group');
+    Route::get('/create/', [ExtraFeature::class, 'groupCreateView'])->name('create.group');
+    Route::post('/create/store', [ExtraFeature::class, 'createGroup'])->name('store.group');
+    Route::get('/view/{id}', [ExtraFeature::class, 'homeGroup'])->name('home.group');
+    Route::post('/{id}/post/create', [ExtraFeature::class, 'createGroupPost'])->name('create.post.group');
+
 });
