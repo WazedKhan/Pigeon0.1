@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
-use App\Models\GroupMember;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use App\Models\Post;
 use App\Models\User;
+use App\Models\Group;
+use App\Models\PostImage;
+use App\Models\GroupMember;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExtraFeature extends Controller
 {
@@ -39,7 +41,9 @@ class ExtraFeature extends Controller
     public function showGroups()
     {
         $groups = Group::all();
-        return view('groups.index',compact('groups'));
+        $joinedGroup = GroupMember::where('user_id',Auth::user()->id)->get();
+        $myGroup = Group::where('user_id',Auth::user()->id)->get();
+        return view('groups.index',compact('groups','myGroup','joinedGroup'));
     }
 
     public function groupCreateView()
@@ -88,6 +92,46 @@ class ExtraFeature extends Controller
             ]);
             return redirect()->back();
         }
+    }
+
+    public function homeGroup($group_id)
+    {
+        $group = Group::find($group_id);
+        $post = Post::where('group_id',$group_id)->latest()->get();
+        return view('groups.group_home',compact('post','group_id','group'));
+    }
+
+    public function createGroupPost($group_id)
+    {
+        $emotion = 'Normal';
+
+        if(request('emotion')){
+            $hello = request()->caption;
+            $hello = str_replace(' ', '_', $hello);
+            $command = escapeshellcmd('python ' . getcwd() . '/python/main.py ' . $hello);
+            $emotion = shell_exec($command);
+        }
+
+        $post = Post::create([
+            'caption' => request('caption'),
+            'type' => 'logged',
+            'user_id' => Auth::id(),
+            'group_id'=>$group_id,
+            'emotion' => $emotion
+        ]);
+
+        if (request('image')) {
+            foreach (request()->image as $value) {
+                $images = $value->store('posts', 'public');
+                PostImage::create([
+                    'post_id' => $post->id,
+                    'user_id' => $post->user_id,
+                    'image' => $images,
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('post_created', 'Post Created Successfully!');
     }
     
 }
