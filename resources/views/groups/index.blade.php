@@ -7,35 +7,58 @@
       @foreach ($groups as $item)
         @php $count+=1 @endphp
 
+        @if (!$item->group_member->contains('user_id',Auth::user()->id))
           <div class="card m-1" style="width: 18rem;">
             <img class="card-img-top" src="{{ url('/storage/'.$item->image) }}" alt="Card image cap" height="150">
             <div class="card-header">
-              <strong>{{ $item->name }}</strong> 
+              <a href="{{ route('home.group',$item->id) }}"><strong>{{ $item->name }}</strong> </a>
               <p>
                 {{ $item->group_member->count() }} members <i class="fa-thin fa-period"></i>
               </p>
             </div>
             <div class="card-body">
-              <a class="form-control btn btn-warning" href="{{ route('groups.join',$item->id) }}">Join</a>
+              @if ($item->user_id == Auth::user()->id)
+                <a class="form-control btn btn-warning" href="{{ route('home.group',$item->id) }}">Manage</a>
+              @else
+                <a class="form-control btn btn-warning" href="{{ route('groups.join',$item->id) }}">Join</a>
+              @endif
             </div>
           </div>
         
           @if ($count/3==1)
-          {{-- {{ $count }} --}}
             <div class="w-100"></div>
             @php $count = 0 @endphp
           @endif
+        @endif
       @endforeach
     </div>
   </div>
 @endsection
+
 @section('sidebar')
   <a class="form-control btn btn-info" href="{{ route('create.group') }}">Create a group</a>
-  <div class="list-group pt-1">
-    <a href="#" class="list-group-item list-group-item-action active">Active item</a>
-    <a href="#" class="list-group-item list-group-item-action">Item</a>
-    <a href="#" class="list-group-item list-group-item-action disabled">Disabled item</a>
-  </div>
+  <h3>Groups you manage</h3>
+  <ul class="list-group list-group-flush">
+    @foreach ($myGroup as $item)
+      <a href="{{ route('home.group',$item->id) }}">
+        <li class="list-group-item list-group-item-action">
+          <img class="rounded" src="{{ url('/storage/'.$item->image) }}" height="50" width="50">
+          {{ $item->name}}
+        </li>
+      </a>
+    @endforeach
+  </ul>
+  <h3>Groups you've joined</h3>
+  <ul class="list-group list-group-flush">
+    @foreach ($joinedGroup as $item)
+      <a href="{{ route('home.group',$item->group_id) }}">
+        <li class="list-group-item list-group-item-action">
+          <img class="rounded" src="{{ url('/storage/'.$item->group->image) }}" height="50" width="50">
+          {{ $item->group->name}}
+        </li>
+      </a>
+    @endforeach
+  </ul>
 
 
   <div class="media-body" style=" box-shadow: 25rem border-block-color: #131111; ">
