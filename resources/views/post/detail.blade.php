@@ -150,12 +150,12 @@
       </div>
       <div class="modal-body">
 
-        <form action="{{ route('post.comment.edit',$comment->id) }}" method="post">
+        {{-- <form action="{{ route('post.comment.edit',$comment->id) }}" method="post">
           @csrf
 
           <input class="form-control m-1" name="comment" type="text" value="{{ $comment->comment }}">
           <button type="submit" class="form-control btn btn-primary m-1">Submit</button>
-        </form>
+        </form> --}}
 
       </div>
       <div class="modal-footer">

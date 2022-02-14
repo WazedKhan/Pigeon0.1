@@ -114,7 +114,7 @@ class ExtraFeature extends Controller
 
     public function createGroupPost($group_id)
     {
-        $emotion = 'Normal';
+        $emotion = 'None';
 
         if(request('emotion')){
             $hello = request()->caption;
