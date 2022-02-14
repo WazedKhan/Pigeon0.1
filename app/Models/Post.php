@@ -34,4 +34,9 @@ class Post extends Model
     {
         return $this->hasMany(Report::class);
     }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }
