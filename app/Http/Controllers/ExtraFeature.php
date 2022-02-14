@@ -165,5 +165,11 @@ class ExtraFeature extends Controller
         $members = GroupMember::where('group_id',$group_id)->where('status',true)->get();
         return view('groups.members',compact('group','members'));
     }
+
+    public function removeMembers($member_id)
+    {
+        GroupMember::find($member_id)->delete();
+        return redirect()->back();
+    }
     
 }
