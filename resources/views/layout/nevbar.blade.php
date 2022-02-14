@@ -11,6 +11,7 @@
           @if (Auth::check())
           <a class="nav-item nav-link align-items-center " href=" {{ route('suggest') }} "><i class="fas fa-person-booth "> Find Buddy's</i></a>
           <a class="nav-item nav-link" href=" {{ route('chat') }} "><i class="fas fa-crow">Chat</i></a>
+          <a class="nav-item nav-link" href=" {{ route('groups') }} "><i class="fas fa-users-cog"></i></a>
           @endif
 
           <form class="form-inline my-2 my-lg-0 pl-5" action="{{ route('search') }}" method="GET">
