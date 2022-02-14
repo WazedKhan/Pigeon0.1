@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Report;
 use App\Models\Commnet;
+use App\Models\Follow;
 use App\Models\PostImage;
 use App\Models\ReportCategory;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,14 @@ class   PostController extends Controller
     // Post index view
     public function index()
     {
-        $post = Post::latest()->get();
+        $users = Follow::where('profile_id',Auth::user()->id)->pluck('user_id');
+        if(empty($users->toArray()))
+        {
+            $users = 0;
+        }
+        $post = Post::whereIn('user_id',$users)
+                ->orwhere('user_id',Auth::user()->id)
+                ->latest()->get();
         $image = PostImage::all();
         return view('post.home', compact('post', 'image'));
     }
