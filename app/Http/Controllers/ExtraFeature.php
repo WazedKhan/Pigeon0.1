@@ -96,9 +96,20 @@ class ExtraFeature extends Controller
 
     public function homeGroup($group_id)
     {
+        $user = Auth::user();
+        $permission = GroupMember::where('user_id',$user->id)
+                    ->where('group_id',$group_id)
+                    ->where('status',true)->exists();
+
         $group = Group::find($group_id);
+        $admin = false;
+        if ($group->user_id == $user->id) {
+            $permission = true;
+            $admin=true;
+        }
+
         $post = Post::where('group_id',$group_id)->latest()->get();
-        return view('groups.group_home',compact('post','group_id','group'));
+        return view('groups.group_home',compact('post','group_id','group','permission','admin'));
     }
 
     public function createGroupPost($group_id)
@@ -132,6 +143,27 @@ class ExtraFeature extends Controller
         }
 
         return redirect()->back()->with('post_created', 'Post Created Successfully!');
+    }
+
+    public function joinGroupRequest($group_id)
+    {
+        $request_list = GroupMember::where('group_id',$group_id)
+                        ->where('status',0)->get();
+        $group=Group::find($group_id);
+        return view('groups.join',compact('request_list','group'));
+    }
+
+    public function joinGroupRequestApprove($member_id)
+    {
+        GroupMember::find($member_id)->update(['status'=>true]);
+        return redirect()->back();
+    }
+
+    public function approvedMembers($group_id)
+    {
+        $group = Group::find($group_id);
+        $members = GroupMember::where('group_id',$group_id)->where('status',true)->get();
+        return view('groups.members',compact('group','members'));
     }
     
 }
