@@ -30,6 +30,8 @@ Route::prefix('post/')->group(function () {
     Route::get('/like/{post_id}/', [PostController::class, 'like'])->name('post.like');
     Route::get('/{post_id}/form', [PostController::class, 'commnetCreateV'])->name('post.comment');
     Route::post('/{post_id}/make', [PostController::class, 'makeComment'])->name('post.comment.make');
+    Route::post('/{post_id}/edit', [PostController::class, 'editComment'])->name('post.comment.edit');
+    Route::get('/{post_id}/delete', [PostController::class, 'deleteComment'])->name('post.comment.delete');
     Route::get('/like/{post_id}/list', [PostController::class, 'viewLikes'])->name('post.likers');
     Route::get('/photo/{id}/delete', [PostController::class, 'deleteImage'])->name('post.image.delete');
     Route::post('/report/{post_id}', [PostController::class, 'makeReport'])->name('post.report');
@@ -101,5 +103,6 @@ Route::prefix('/group/')->group(function(){
     Route::get('/{id}/join/requests', [ExtraFeature::class, 'joinGroupRequest'])->name('join.group.request');
     Route::get('/user/{id}/approved', [ExtraFeature::class, 'joinGroupRequestApprove'])->name('join.group.request.approved');
     Route::get('/{id}/approvedmembers', [ExtraFeature::class, 'approvedMembers'])->name('join.group.approved.members');
+    Route::get('/{id}/removemembers', [ExtraFeature::class, 'removeMembers'])->name('group.remove.members');
 
 });
