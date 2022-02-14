@@ -34,8 +34,19 @@
 
 <div class="media-body">
   <div class="article-metadata">
-    <img src=" {{$post->user->profile->profileImage()}} " class="rounded-circle" width="60" height="60" alt="Profile Image">
-    <a class="mr-2 " href="{{ route('profile.show',$post->user->profile->id) }}"> <h3>{{$post->user->name}}</h3> </a>
+    @if ($post->group_id)
+    <div class="card">
+      <div class="card-body">
+        <img class="rounded article-img" src="{{ url('/storage/'.$post->group->image) }}">
+        <a href="{{ route('home.group',$post->group->id) }}"> <strong>{{$post->group->name}}</strong></a>
+      </div>
+    </div>
+    @endif
+    <hr>
+    <a class="mr-2 " href="{{ route('profile.show',$post->user->profile->id) }}"> 
+      <img src=" {{$post->user->profile->profileImage()}} " class="rounded-circle" width="60" height="60" alt="Profile Image">
+      <h3>{{$post->user->name}}</h3> 
+    </a>
     <small class="text-muted float-right "> {{$post->updated_at->diffforhumans()}} </small> <span class="badge badge-primary"> Feeling {{$post->emotion}} </span>
     @if (Auth::user()->id == $post->user->id)
       <a href=" {{ route('post.updateView', $post->id) }} " class="badge badge-dark">Edit</a>
@@ -74,9 +85,15 @@
   @foreach ($comments as $comment)
       <ul class="list-group m-1">
         <li class="list-group-item ">
+          @if ($comment->user->id == Auth::user()->id)
+            <a  href="#" role="button" data-toggle="modal" data-target="#exampleModalCenter2">
+              <i class="fas fa-edit"></i>
+            </a>|
+            <a href="{{ route('post.comment.delete',$comment->id) }}"><i class="fas fa-trash-alt"></i></a>|
+          @endif
           <a href="{{ route('profile.show',$post->user->profile->id) }}">
             <small><strong>{{$comment->user->name}}:</strong></small>
-          </a> {{$comment->comment}} <small class="text-muted float-right "> {{$comment->updated_at->diffforhumans()}} </small>
+          </a> {{$comment->comment}} <small class="text-muted float-right "> {{ $comment->updated_at->diffforhumans()}} </small>
         </li>
       </ul>
   @endforeach
@@ -90,9 +107,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title text-center" id="exampleModalCenterTitle">Submit Your Report</h5>
-        <div>
-          <p>You can make report only once on this post and can't remove once submitted</p>
-        </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -123,6 +137,34 @@
   </div>
 </div>
 
+{{-- Modal Comment --}}
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalCenterTitle2">Update Comment</h5>
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form action="{{ route('post.comment.edit',$comment->id) }}" method="post">
+          @csrf
+
+          <input class="form-control m-1" name="comment" type="text" value="{{ $comment->comment }}">
+          <button type="submit" class="form-control btn btn-primary m-1">Submit</button>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection
 
