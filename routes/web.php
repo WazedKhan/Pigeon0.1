@@ -98,5 +98,8 @@ Route::prefix('/group/')->group(function(){
     Route::post('/create/store', [ExtraFeature::class, 'createGroup'])->name('store.group');
     Route::get('/view/{id}', [ExtraFeature::class, 'homeGroup'])->name('home.group');
     Route::post('/{id}/post/create', [ExtraFeature::class, 'createGroupPost'])->name('create.post.group');
+    Route::get('/{id}/join/requests', [ExtraFeature::class, 'joinGroupRequest'])->name('join.group.request');
+    Route::get('/user/{id}/approved', [ExtraFeature::class, 'joinGroupRequestApprove'])->name('join.group.request.approved');
+    Route::get('/{id}/approvedmembers', [ExtraFeature::class, 'approvedMembers'])->name('join.group.approved.members');
 
 });
