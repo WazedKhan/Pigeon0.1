@@ -40,7 +40,7 @@
             <img class="rounded-circle badge-dark" src="{{$item->user->profile->profileImage()}}" height="50" width="50">
             {{ $item->user->name }}
             @if ($group->user_id == Auth::user()->id)
-                <a class="btn btn-danger btn-sm float-right" href=#>Remove</a>
+                <a class="btn btn-danger btn-sm float-right" href="{{ route('group.remove.members',$item->id) }}">Remove</a>
             @endif
         </li>
     @endforeach
