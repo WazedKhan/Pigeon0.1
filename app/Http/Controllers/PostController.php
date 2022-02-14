@@ -81,7 +81,7 @@ class   PostController extends Controller
         $post = Post::findOrFail($post_id);
         $report = Report::where('post_id', $post_id);
         $image = PostImage::where('post_id', $post_id)->get();
-        $comments = Commnet::where('post_id', $post_id)->get();
+        $comments = Commnet::where('post_id', $post_id)->latest()->get();
         return view('post.detail', compact('post', 'comments', 'image', 'recat', 'report'));
     }
 
@@ -167,6 +167,20 @@ class   PostController extends Controller
             User::find($userId->user_id)->notify(new CommentNotification());
         }
         return redirect()->route('post.detail', $post_id)->with('comment','Commented Successfully!');
+    }
+
+    // Delete commnet
+    public function deleteComment($comment_id)
+    {
+        Commnet::find($comment_id)->delete();
+        return redirect()->back();
+    }
+
+    // Comment Edit
+    public function editComment($comment_id)
+    {
+        Commnet::find($comment_id)->update(['comment'=>request()->comment]);
+        return redirect()->back();
     }
 
     // Post Liked People list shows Method
