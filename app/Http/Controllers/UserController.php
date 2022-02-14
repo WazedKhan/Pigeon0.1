@@ -38,6 +38,8 @@ class UserController extends Controller
     {
         if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']]))
         {
+            $id = Auth::user()->id;
+            User::find($id)->update(['is_active'=>TRUE]);
             if(Auth::user()->status=="block")
             {
                 Auth::logout(Auth::user());
@@ -50,7 +52,7 @@ class UserController extends Controller
         }
         else
         {
-            return redirect()->back()->with('Barta', 'Login Failed! +_+');
+            return redirect()->back()->with('Login_failed', "Email or Password did't matched.");
         }
     }
     // Login func
@@ -61,6 +63,7 @@ class UserController extends Controller
     public function logout()
     {
         $user = Auth::user();
+        User::find($user->id)->update(['is_active'=>FALSE]);
         Auth::logout($user);
         return redirect()->route('login');
     }

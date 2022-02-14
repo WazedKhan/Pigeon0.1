@@ -1,12 +1,15 @@
 <div class="content-section">
-    <h3>Let's Meet Awesome People</h3>
+    
     <p class='text-muted'>
       <ul class="list-group">
         <div class="list-group">
           <a href="{{ route('groups') }}" class="list-group-item list-group-item-action active text-center m-1"><i class="fas fa-users"> Goups</i></a>
         </div>
+        <h3>Active Friends</h3>
           @foreach ($user_info as $item)
-          <li class="list-group-item list-group-item-light m-1">{{ $item->name }}</li>
+          @if ($item->is_active)
+            <li class="list-group-item list-group-item-light m-1"> {{ $item->name }} <i class="fas fa-signal"></i></li>
+          @endif
           @endforeach
       </ul>
     </p>
