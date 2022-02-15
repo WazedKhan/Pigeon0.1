@@ -35,6 +35,7 @@ Route::prefix('post/')->group(function () {
     Route::get('/like/{post_id}/list', [PostController::class, 'viewLikes'])->name('post.likers');
     Route::get('/photo/{id}/delete', [PostController::class, 'deleteImage'])->name('post.image.delete');
     Route::post('/report/{post_id}', [PostController::class, 'makeReport'])->name('post.report');
+    Route::get('/{post_id}/share', [PostController::class, 'sharePost'])->name('post.share');
 });
 
 
