@@ -17,10 +17,11 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('group_id')->nullable();
+            $table->unsignedBigInteger('share_id')->nullable();
             $table->string('type');
-            $table->string('caption');
+            $table->string('caption')->nullable();
             $table->string('emotion');
-            $table->boolean('shared')->default(false);
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
             $table->index('user_id');
         });
