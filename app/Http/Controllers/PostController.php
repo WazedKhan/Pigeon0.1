@@ -10,6 +10,7 @@ use App\Models\Commnet;
 use App\Models\Follow;
 use App\Models\PostImage;
 use App\Models\ReportCategory;
+use App\Models\Share;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\LikeNotification;
 use App\Notifications\CommentNotification;
@@ -30,8 +31,10 @@ class   PostController extends Controller
         {
             $users = 0;
         }
-        $post = Post::whereIn('user_id',$users)
+        $post = Post::whereIn('user_id',[$users])
                 ->orwhere('user_id',Auth::user()->id)
+                ->orwhere('type','public')
+                ->where('is_active',true)
                 ->latest()->get();
         $image = PostImage::all();
         return view('post.home', compact('post', 'image'));
@@ -47,11 +50,13 @@ class   PostController extends Controller
     // Post Create Method
     public function store()
     {
-        $hello = request()->caption;
-        $hello = str_replace(' ', '_', $hello);
-        $command = escapeshellcmd('python ' . getcwd() . '/python/main.py ' . $hello);
-        $output = shell_exec($command);
-
+        $output="None";
+        if (request('caption')) {
+            $hello = request()->caption;
+            $hello = str_replace(' ', '_', $hello);
+            $command = escapeshellcmd('python ' . getcwd() . '/python/main.py ' . $hello);
+            $output = shell_exec($command);
+        }
         $post = Post::create([
             'caption' => request('caption'),
             'type' => request('type'),
@@ -213,5 +218,31 @@ class   PostController extends Controller
         {
             return redirect()->back()->with('alreay_reported', "You Already Reported On This Post");
         }
+    }
+
+    public function sharePost($post_id)
+    {
+        
+        $post = Post::Find($post_id);
+        $share = Share::create(['post_id'=>$post_id]);
+
+        $s_post = Post::create([
+            'caption' => $post->caption,
+            'type' => 'logged',
+            'user_id' => Auth::user()->id,
+            'emotion' => $post->emotion,
+            'share_id'=>$share->id
+        ]);
+        if ($post->post_image->isNotEmpty()) {
+            foreach ($post->post_image as $value) {
+                PostImage::create([
+                    'post_id' => $s_post->id,
+                    'user_id' => $s_post->user_id,
+                    'image' => $value->image,
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('post_created', 'Post Created Successfully!');
     }
 }
