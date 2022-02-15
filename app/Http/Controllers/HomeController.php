@@ -12,6 +12,8 @@ class HomeController extends Controller
     public function post()
     {
         $post = Post::where('type', '=', 'public')
+            ->where('group_id',null)
+            ->where('share_id',null)
             ->orderBy('updated_at', 'desc')
             ->get();
 
