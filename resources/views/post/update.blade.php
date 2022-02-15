@@ -3,6 +3,15 @@
 <form action=" {{ route('post.update', $post->id) }} " method="POST" enctype="multipart/form-data">
     @method('PATCH')
     @csrf
+
+    <div class="form-group">
+        <label for="caption" class="col-md-4 col-form-label">Edit your emotion</label>
+        <input class="form-control" name="emotion" type="text" value="{{ old('caption') ?? $post->emotion}}">
+        <small  class="form-text text-muted ml-3">We apologise if your emotion detected incorrectly, 
+            our devs are working on the AI to improve. Thanks For Understanding</small>
+    </div>
+
+
     <div class="form-group">
         <label for="caption" class="col-md-4 col-form-label">Select Audience </label>
         <select class="custom-select" id="postType" name="type">

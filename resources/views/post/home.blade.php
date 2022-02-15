@@ -17,6 +17,11 @@
           <img class="rounded-circle article-img" src={{$item->user->profile->profileImage()}}>
         @endif
           <a class="mr-2" href="{{ route('profile.show',$item->user->id) }}"> {{$item->user->name}} </a>
+          @if ($item->share_id)
+          <p><i class="fas fa-caret-right"></i> shared from 
+          <a href="{{ route('profile.show',$item->share->post->user->id) }}">{{ $item->share->post->user->name }}</a>
+          </p>
+          @endif
           <div>
             <small class="text-muted"> {{$item->updated_at->diffforhumans()}} </small> | </small><span class="badge badge-info text-center">{{$item->emotion}}</span>
           </div>
@@ -51,8 +56,14 @@
     <a class="btn btn-outline-info float-left align-self-center" href="{{ route('post.like', $item->id) }}" role="button">
       <i class="far fa-heart"> Like</i>
     </a>
+    <a class="btn btn-outline-secondary float-right align-self-center" href="{{ route('post.share', $item->id) }}" role="button">
+      <i class="fas fa-share"></i> Share
+    </a>
     <a class="btn btn-outline-secondary float-right align-self-center" href="{{ route('post.comment', $item->id) }}" role="button">
       <i class="far fa-comment-alt"> Comment </i>
+    </a>
+    <a class="btn btn-outline-secondary float-right align-self-center" href="{{ route('post.detail',$item->id) }}" role="button">
+      <i class="far fa-flag"> Report </i>
     </a>
   </div>
 </div>
