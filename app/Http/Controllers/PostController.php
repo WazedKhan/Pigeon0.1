@@ -123,11 +123,16 @@ class   PostController extends Controller
     // Post Delete Method
     public function delete($id)
     {
+        $share = Share::where('post_id',$id)->get();
+        if($share->isNotEmpty()){
+            foreach ($share as $value) {
+                Post::where('share_id',$value->id)->first()->delete();
+            }
+        };
         Post::find($id)->delete();
         return redirect()->route('post.home')
             ->with('post_deleted', 'Post Deleted successfully');
     }
-
 
     public function deleteImage($image_id)
     {
