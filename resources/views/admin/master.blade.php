@@ -92,6 +92,13 @@
               <span>Reports</span>
             </a>
           </li>
+
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fas fa-users"></i>
+              <span>Groups</span>
+            </a>
+          </li>
           
       </div>
       <!-- sidebar-menu  -->

@@ -31,11 +31,13 @@ class   PostController extends Controller
         {
             $users = 0;
         }
-        $post = Post::whereIn('user_id',[$users])
-                ->where('is_active',false)
-                ->orwhere('user_id',Auth::user()->id)
-                ->orwhere('type','public')
-                ->latest()->get();
+        $post = Post::
+                // whereIn('user_id',[$users])
+                // ->where('is_active',false)
+                // ->orwhere('user_id',Auth::user()->id)
+                // ->orwhere('type','public')
+                latest()->get();
+        $post = Post::whereIn('user_id',$users)->latest()->get();
         $image = PostImage::all();
         return view('post.home', compact('post', 'image'));
     }
