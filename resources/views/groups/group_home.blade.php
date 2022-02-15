@@ -26,14 +26,10 @@
   </div>
     <hr>
     <div class="btn-group" role="group" aria-label="Basic example">
-      <a class="btn btn-info btn-lg-sm btn-block m-1" href="{{ route('home.group',$group->id) }}">Home</a>
-      <a class="btn btn-secondary btn-lg-sm btn-block m-1" href="{{ route('join.group.approved.members',$group->id) }}">Approved Members</a>
-      <a class="btn btn-secondary btn-lg-sm btn-block m-1" href="http://">Media</a>
     @if ($admin)
+    <a class="btn btn-info btn-lg-sm btn-block m-1" href="{{ route('home.group',$group->id) }}">Home</a>
+      <a class="btn btn-secondary btn-lg-sm btn-block m-1" href="{{ route('join.group.approved.members',$group->id) }}">Approved Members</a>
       <a class="btn btn-secondary btn-lg-sm btn-block m-1" href="{{ route('join.group.request',$group->id) }}">Joinig Requests</a>
-      @if ($group->privacy=='private')
-      <a class="btn btn-secondary btn-lg-sm btn-block m-1" href="#">Post Requests</a>
-      @endif
     </div>
     @endif
 </div>
@@ -65,6 +61,9 @@
           </a>
           <div>
             <small class="text-muted"> {{$item->updated_at->diffforhumans()}} </small> | </small><span class="badge badge-info text-center">{{$item->emotion}}</span>
+            @if ($admin)
+              <a href=" {{ route('post.delete', $item->id) }} " class="badge badge-danger">Delete</a>
+            @endif
           </div>
         </div>
         @if ($item->post_image == '[]')
