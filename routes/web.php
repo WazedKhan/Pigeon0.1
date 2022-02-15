@@ -78,11 +78,12 @@ Route::post('chat/text/{id}',[ChatController::class,'addText'])->name('chat.text
 // Admin's Routes
 Route::prefix('/admin/')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.home');
-    Route::get('/posts', [AdminController::class, 'posts'])->name('admin.posts');
     Route::get('/user', [Users::class, 'index'])->name('admin.user.index');
+    Route::get('/posts', [AdminController::class, 'posts'])->name('admin.posts');
     Route::patch('/user/status/{id}', [Users::class, 'status'])->name('admin.user.changeStatus');
     Route::get('/reports', [AdminController::class, 'reportCategorylist'])->name('admin.report.list');
     Route::post('/reports/create', [AdminController::class, 'reportCategorycreate'])->name('admin.report.create');
+    Route::get('/reports/post/{id}', [AdminController::class, 'postReportList'])->name('admin.report.post.list');
 });
 
 // Password Reset Routes

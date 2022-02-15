@@ -15,8 +15,13 @@ class Report extends Model
         return $this->belongsTo(Post::class);
     }
 
-    public function ReportCategroy()
+    public function report_category()
     {
         return $this->belongsTo(ReportCategory::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'reporter_id','id');
     }
 }

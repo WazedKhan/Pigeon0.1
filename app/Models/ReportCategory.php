@@ -9,4 +9,9 @@ class ReportCategory extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function report()
+    {
+        return $this->hasMany(Report::class);
+    }
 }

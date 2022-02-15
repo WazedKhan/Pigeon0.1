@@ -201,6 +201,7 @@ class   PostController extends Controller
     {
         $user_id = Auth::user()->id;
         $post = Post::findOrFail($post_id);
+
         $report = Report::where('reporter_id', $user_id)->where('post_id', $post_id)->exists();
         if ($post->user_id != $user_id && $report == false) {
             Report::create([

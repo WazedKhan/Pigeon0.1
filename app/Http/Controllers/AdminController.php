@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Post;
+use App\Models\Report;
 use App\Models\ReportCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -47,6 +48,16 @@ class AdminController extends Controller
     {
         ReportCategory::create(request()->except('_token'));
         return redirect()->back();
+    }
+
+    public function postReportList($post_id)
+    {
+        $total = 0;
+        $report = Report::where('post_id',$post_id)->get();
+        foreach ($report as $value) {
+            $total =+ $value->report_category->point;
+        }
+        return view('admin.user.post_report',compact('report','total'));
     }
 
 }
