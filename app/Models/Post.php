@@ -43,4 +43,8 @@ class Post extends Model
     {
         return $this->belongsTo(Share::class);
     }
+    public function shared()
+    {
+        return $this->hasMany(Share::class);
+    }
 }

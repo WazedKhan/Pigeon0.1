@@ -8,7 +8,7 @@
       @if ($post->share_id)
         @if ($post->share->post->group_id)
           <img class="rounded article-img" src="{{ url('/storage/'.$post->share->post->group->image) }}">
-          <a href="{{ route('home.group',$post->share->post->group->id) }}"> <strong>{{$post->share->post->user->name}}</strong></a>
+          <a href="{{ route('home.group',$post->share->post->group->id) }}"> <strong>{{$post->share->post->group->name}}</strong></a>
           <i class="fas fa-caret-right"></i>
           <a href="{{ route('profile.show',$post->share->post->user->id) }}"><strong>{{ $post->share->post->user->name }}</strong></a>
           <text-sc>Owner</text-sc>
@@ -77,8 +77,7 @@
     @endif
     <div class="row pl-3">
       <a href="{{route('post.likers',$post->id)}}">{{$post->liked->count()}} 💖</a> |
-       💬 {{$comments->count()}} Comments | {{ $report->count() }} Reports  | 
-      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61fde7493d91fa1c"></script>
+       💬 {{$comments->count()}} Comments | {{ $report->count() }} Reports  | {{ $post->shared->count() }} Share
       <div class="addthis_inline_share_toolbox"></div>
     </div>
   </div>

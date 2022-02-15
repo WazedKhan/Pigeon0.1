@@ -86,7 +86,7 @@
         @endforeach
         @endif
         <div class="row pl-3">
-          <a href="{{route('post.likers',$item->id)}}"> {{$item->liked->count()}} 💖</a>| 💬 {{$item->commnet->count()}}
+          <a href="{{route('post.likers',$item->id)}}"> {{$item->liked->count()}} 💖</a> | 💬 {{$item->commnet->count()}} | {{ $item->shared->count() }} Share
         </div>
         <hr>
 
