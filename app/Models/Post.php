@@ -39,4 +39,8 @@ class Post extends Model
     {
         return $this->belongsTo(Group::class);
     }
+    public function share()
+    {
+        return $this->belongsTo(Share::class);
+    }
 }
