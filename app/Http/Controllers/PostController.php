@@ -32,9 +32,9 @@ class   PostController extends Controller
             $users = 0;
         }
         $post = Post::whereIn('user_id',[$users])
+                ->where('is_active',false)
                 ->orwhere('user_id',Auth::user()->id)
                 ->orwhere('type','public')
-                ->where('is_active',true)
                 ->latest()->get();
         $image = PostImage::all();
         return view('post.home', compact('post', 'image'));
@@ -208,6 +208,7 @@ class   PostController extends Controller
                 'post_id' => $post_id,
                 'reporter_id' => $user_id
             ]);
+            
             return redirect()->back()->with('report', 'Report Submited Successfully');
         }
         elseif($post->user_id == $user_id)
@@ -220,6 +221,7 @@ class   PostController extends Controller
         }
     }
 
+    // Share Methods
     public function sharePost($post_id)
     {
         
