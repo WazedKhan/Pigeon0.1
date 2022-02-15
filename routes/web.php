@@ -80,6 +80,7 @@ Route::prefix('/admin/')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.home');
     Route::get('/user', [Users::class, 'index'])->name('admin.user.index');
     Route::get('/posts', [AdminController::class, 'posts'])->name('admin.posts');
+    Route::get('/posts/delete/{id}', [AdminController::class, 'delete'])->name('admin.posts.delete');
     Route::patch('/user/status/{id}', [Users::class, 'status'])->name('admin.user.changeStatus');
     Route::get('/reports', [AdminController::class, 'reportCategorylist'])->name('admin.report.list');
     Route::post('/reports/create', [AdminController::class, 'reportCategorycreate'])->name('admin.report.create');

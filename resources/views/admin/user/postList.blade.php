@@ -25,8 +25,7 @@
         <p class="m-0"> <strong>Created At: </strong>{{$item->created_at}} </p>
         <p class="m-0"> <strong>Updated At: </strong>{{$item->user->updated_at}} </p>
         <span class="d-block">{{ $item->username }} </span>
-        <a class="btn btn-danger" href="{{ route('post.delete',$item->id) }}">Delete</a>
-        <a class="btn btn-warning" href="http://">Hide</a>
+        <a class="btn btn-danger" href="{{ route('admin.posts.delete',$item->id) }}">Delete</a>
       </div>
     </div>
     @endforeach

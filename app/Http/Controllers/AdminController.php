@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Post;
-use App\Models\Report;
-use App\Models\ReportCategory;
 use App\Models\User;
+use App\Models\Share;
+use App\Models\Report;
 use Illuminate\Http\Request;
+use App\Models\ReportCategory;
 
 class AdminController extends Controller
 {
@@ -34,6 +35,18 @@ class AdminController extends Controller
     {
         $posts = Post::all();
         return view('admin.user.postList', compact('posts'));
+    }
+
+    public function delete($id)
+    {
+        $share = Share::where('post_id',$id)->get();
+        if($share->isNotEmpty()){
+            foreach ($share as $value) {
+                Post::where('share_id',$value->id)->first()->delete();
+            }
+        };
+        Post::find($id)->delete();
+        return redirect()->back();
     }
 
     // Report
