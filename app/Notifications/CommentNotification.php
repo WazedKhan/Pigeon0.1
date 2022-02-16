@@ -44,7 +44,7 @@ class CommentNotification extends Notification
         return
         [
             'info'=>Auth::user(),
-            'message'=>'commenter on your post'
+            'message'=>'commented on your post'
         ];
     }
 

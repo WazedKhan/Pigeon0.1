@@ -61,12 +61,12 @@
   </ul>
 
 
-  <div class="media-body" style=" box-shadow: 25rem border-block-color: #131111; ">
+  {{-- <div class="media-body" style=" box-shadow: 25rem border-block-color: #131111; ">
     <div class="pt-1">
       <form action="#" method="post">
         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2" type="submit">Search</button>
       </form>
     </div>
-  </div>
+  </div> --}}
 @endsection
