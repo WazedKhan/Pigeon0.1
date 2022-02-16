@@ -1,7 +1,7 @@
 @extends('admin.master')
 @section('content')
 <div class="text-center h2 m-4">
-  Report Category
+  Report Category({{ $reCat->count() }})
 </div>
   <div class="card-deck">
   @foreach ($reCat as $item)

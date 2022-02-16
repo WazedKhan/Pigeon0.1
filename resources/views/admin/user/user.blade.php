@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('page_name')
-    <h1>User List</h1>
+<h1 class="text-center text-info">Users({{ $data->count() }})</h1>
 @endsection
 @section('content')
   @if(session()->has('notice'))
@@ -12,8 +12,8 @@
     @foreach ($data as $item)
     <div class="d-flex text-muted pt-3">
       <div class="col-1">
-        {{-- @dd($user->profile->profileImage()) --}}
         <img src="{{$item->profile->profileImage()}}" class="rounded-circle" width="50" height="50" object-fit ="cover">
+        
       </div>
       <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
         <div class="d-flex justify-content-between">
@@ -28,7 +28,6 @@
               <button type="submit" name="status" value="active"><i class="fas fa-user-check"></i> Unblock </i></button>
             @endif
           </form>
-
         </div>
         <span class="d-block">{{$item->username}} </span>
       </div>

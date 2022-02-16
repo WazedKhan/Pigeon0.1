@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Group;
 use App\Models\Share;
 use App\Models\Report;
+use App\Models\PostImage;
 use Illuminate\Http\Request;
 use App\Models\ReportCategory;
 
@@ -20,15 +22,37 @@ class AdminController extends Controller
     public function index()
     {
         $search = 7;
+        $post_search = 7;
+        $post = Post::all();
+        $group = Group::all();
+        $image = PostImage::all();
+        $share = Share::all();
+
+        // 
+        $post_search_value = Post::where('created_at','>=', Carbon::now()->subDays($post_search))
+        ->get();
+
+        // 
+
         if (request()->search) {
             $search = request()->search;
             $data = User::where('created_at','>=', Carbon::now()->subDays($search))
             ->get();
-            return view('admin.user.dashboard',compact('data','search')); 
+            return view('admin.user.dashboard',
+            compact('data','search','post','group','image','share','post_search','post_search_value')); 
         }
+
+
+        if(request()->post_search){
+            $post_search_value = User::where('created_at','>=', Carbon::now()->subDays(request()->post_search))
+            ->get();
+        }
+
         $data = User::where('created_at','>=', Carbon::now()->subDays($search))
         ->get();
-        return view('admin.user.dashboard',compact('data','search'));
+
+        return view('admin.user.dashboard',
+        compact('data','search','post','group','image','share','post_search','post_search_value'));
     }
 
     public function posts()
@@ -71,6 +95,12 @@ class AdminController extends Controller
             $total =+ $value->report_category->point;
         }
         return view('admin.user.post_report',compact('report','total'));
+    }
+
+    public function groups()
+    {
+        $groups = Group::all();
+        return view('admin.user.groups',compact('groups'));
     }
 
 }

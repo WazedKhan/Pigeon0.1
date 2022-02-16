@@ -47,7 +47,7 @@
         </div>
       </div>
       <!-- sidebar-header  -->
-      <div class="sidebar-search">
+      {{-- <div class="sidebar-search">
         <div>
           <div class="input-group">
             <input type="text" class="form-control search-menu" placeholder="Search...">
@@ -58,7 +58,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
       <div class="sidebar-menu">
         <ul>
           <li class="header-menu">
@@ -94,7 +94,7 @@
           </li>
 
           <li class="sidebar-dropdown">
-            <a href="#">
+            <a href="{{ route('admin.group') }}">
               <i class="fas fa-users"></i>
               <span>Groups</span>
             </a>
@@ -104,7 +104,7 @@
       <!-- sidebar-menu  -->
     </div>
     <!-- sidebar-content  -->
-    <div class="sidebar-footer">
+    {{-- <div class="sidebar-footer">
       <a href="#">
         <i class="fa fa-bell"></i>
         <span class="badge badge-pill badge-warning notification">3</span>
@@ -120,7 +120,7 @@
       <a href="#">
         <i class="fa fa-power-off"></i>
       </a>
-    </div>
+    </div> --}}
   </nav>
   <!-- sidebar-wrapper  -->
   <main class="page-content">

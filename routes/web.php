@@ -83,6 +83,7 @@ Route::prefix('/admin/')->group(function () {
     Route::get('/posts/delete/{id}', [AdminController::class, 'delete'])->name('admin.posts.delete');
     Route::patch('/user/status/{id}', [Users::class, 'status'])->name('admin.user.changeStatus');
     Route::get('/reports', [AdminController::class, 'reportCategorylist'])->name('admin.report.list');
+    Route::get('/groups', [AdminController::class, 'groups'])->name('admin.group');
     Route::post('/reports/create', [AdminController::class, 'reportCategorycreate'])->name('admin.report.create');
     Route::get('/reports/post/{id}', [AdminController::class, 'postReportList'])->name('admin.report.post.list');
 });
