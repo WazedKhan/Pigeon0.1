@@ -11,4 +11,13 @@ class Follow extends Model
     use HasFactory;
     protected $table = 'profile_user';
     protected $guarded = [];
+    
+    public function profile()
+    {
+        return $this->belongsTo(Profile::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

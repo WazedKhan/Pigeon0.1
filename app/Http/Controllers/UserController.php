@@ -32,7 +32,7 @@ class UserController extends Controller
             'password'=>bcrypt(request()->password)
         ]);
         Auth::login($user);
-        return redirect()->route('post.home');
+        return redirect()->route('suggest');
     }
     public function signIn(Request $request)
     {

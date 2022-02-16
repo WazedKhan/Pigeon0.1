@@ -32,8 +32,8 @@
       <div class="sidebar-header">
         <div class="user-pic">
           {{-- {{ Auth::user()->profile->image?? '/media/photo.jpg' }} --}}
-          <img class="img-responsive img-rounded" src="{{Auth::user()->profile->profileImage()}}"
-            alt="User picture">
+          {{-- <img class="img-responsive img-rounded" src="{{Auth::user()->profile->profileImage()}}"
+            alt="User picture"> --}}
         </div>
         <div class="user-info">
           <span class="user-name">

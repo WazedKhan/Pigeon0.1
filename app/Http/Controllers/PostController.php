@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Share;
+use App\Models\Follow;
 use App\Models\Report;
 use App\Models\Commnet;
-use App\Models\Follow;
 use App\Models\PostImage;
 use App\Models\ReportCategory;
-use App\Models\Share;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\LikeNotification;
 use App\Notifications\CommentNotification;
@@ -29,15 +30,16 @@ class   PostController extends Controller
         $users = Follow::where('profile_id',Auth::user()->id)->pluck('user_id');
         if(empty($users->toArray()))
         {
-            $users = 0;
+            $post = Post::where('type','public')->latest()->get();
         }
-        $post = Post::
-                // whereIn('user_id',[$users])
-                // ->where('is_active',false)
-                // ->orwhere('user_id',Auth::user()->id)
-                // ->orwhere('type','public')
-                latest()->get();
-        $post = Post::whereIn('user_id',$users)->latest()->get();
+        // $post = Post::
+        //         whereIn('user_id',[$users])
+        //         ->latest()->get();
+        
+        $post = Post::whereIn('user_id',$users)
+                ->orwhere('user_id',Auth::user()->id)
+                ->latest()->get();
+        
         $image = PostImage::all();
         return view('post.home', compact('post', 'image'));
     }

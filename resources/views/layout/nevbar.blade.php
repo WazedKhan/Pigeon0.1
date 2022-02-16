@@ -10,7 +10,7 @@
 
           @if (Auth::check())
           <a class="nav-item nav-link align-items-center " href=" {{ route('suggest') }} "><i class="fas fa-person-booth "> Find Buddy's</i></a>
-          <a class="nav-item nav-link" href=" {{ route('chat') }} "><i class="fas fa-crow">Chat</i></a>
+          <a class="nav-item nav-link" href=" {{ route('chat') }} "><i class="fas fa-crow"></i></a>
           <a class="nav-item nav-link" href=" {{ route('groups') }} "><i class="fas fa-users-cog"></i></a>
           @endif
 
@@ -35,7 +35,9 @@
             <span class="badge badge-danger text-center pt-1">{{ Auth::user()->unreadnotifications()->count() }}</span>
             @endif
           </a>
-
+          @if (Auth::user()->role == 'admin')
+          <a class="nav-item nav-link" href=" {{ route('admin.home') }} "><i class="fas fa-user-cog"></i></a>
+          @endif
           <a class="nav-item nav-link" href=" {{ route('post.create') }} ">Create New Post</a>
           <a class="nav-item nav-link" href="{{route('logout')}}">Log Out</a>
           @else

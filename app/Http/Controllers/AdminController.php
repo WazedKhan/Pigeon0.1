@@ -11,6 +11,7 @@ use App\Models\Report;
 use App\Models\PostImage;
 use Illuminate\Http\Request;
 use App\Models\ReportCategory;
+use App\Notifications\AdminNotification;
 
 class AdminController extends Controller
 {
@@ -28,6 +29,11 @@ class AdminController extends Controller
         $image = PostImage::all();
         $share = Share::all();
 
+
+        $online = User::where('is_active',true)->get();
+        $offline = User::where('is_active',false)->get();
+        $blocked = User::where('status','!=','active')->get();
+
         // 
         $post_search_value = Post::where('created_at','>=', Carbon::now()->subDays($post_search))
         ->get();
@@ -39,7 +45,7 @@ class AdminController extends Controller
             $data = User::where('created_at','>=', Carbon::now()->subDays($search))
             ->get();
             return view('admin.user.dashboard',
-            compact('data','search','post','group','image','share','post_search','post_search_value')); 
+            compact('blocked','data','search','post','group','image','share','post_search','post_search_value','online','offline')); 
         }
 
 
@@ -52,7 +58,7 @@ class AdminController extends Controller
         ->get();
 
         return view('admin.user.dashboard',
-        compact('data','search','post','group','image','share','post_search','post_search_value'));
+        compact('blocked','data','search','post','group','image','share','post_search','post_search_value','online','offline'));
     }
 
     public function posts()
@@ -63,12 +69,14 @@ class AdminController extends Controller
 
     public function delete($id)
     {
+        $user= Post::find($id);
         $share = Share::where('post_id',$id)->get();
         if($share->isNotEmpty()){
             foreach ($share as $value) {
                 Post::where('share_id',$value->id)->first()->delete();
             }
         };
+        // $user->notify(new AdminNotification());
         Post::find($id)->delete();
         return redirect()->back();
     }
